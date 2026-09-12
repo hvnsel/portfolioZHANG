@@ -53,8 +53,9 @@ Then set Pages to publish from `main`, and locally run
 
 ## Editing
 
-Open `index.html` in any text editor. It is commented — each section says what
-belongs in it. Change the text, save, then:
+Open `index.html` in any text editor. Each `<section>` is labelled by its `id`
+(`about`, `research`, `writing`, `experience`, `skills`). Change the text, save,
+then:
 
 ```bash
 git add -A
@@ -71,15 +72,33 @@ python3 -m http.server 8000
 
 ## What to do next
 
-1. **Rewrite the About paragraph.** It is the only part of the site an
-   admissions reader is guaranteed to read, and right now it is my words, not
-   yours. Say what you work on and what you want to work on next.
-2. **Add one image per research project.** A simulator screenshot, a plot, a
-   photo of the lander. Put the file in `media/`, then uncomment the `<figure>`
-   block in that project's entry and point it at your file. This is the single
-   biggest upgrade available — a wall of text reads like a CV, and they already
-   have your CV.
-3. **Add links.** GitHub repos, a demo video, the paper once it is posted. There
-   is a commented-out block in the header for GitHub and Google Scholar.
+1. **Rewrite the About paragraph** so it reads in your voice: what you work on,
+   and what you want to work on next.
+2. **Add one image per research project** — a simulator frame, a plot, a photo of
+   the lander. Text-only reads like a second copy of the CV. Put the file in
+   `media/` and paste this just after that project's `<p class="meta">`:
+
+   ```html
+   <figure>
+     <img src="media/terrain-sim.png" alt="Rover excavating deformable terrain in simulation">
+     <figcaption>Coupled MPM soil and rigid-body rover, simulated on GPU.</figcaption>
+   </figure>
+   ```
+
+3. **Add links** — GitHub, Scholar, a demo video, the paper once it is posted.
+   Paste inside the `<p class="contact">` block in the header:
+
+   ```html
+   <span class="dot">·</span> <a href="https://github.com/hvnsel">GitHub</a>
+   <span class="dot">·</span> <a href="https://scholar.google.com/citations?user=YOURID">Google Scholar</a>
+   ```
+
 4. **Keep the CV in sync.** Replace `HanselZhang_CV.pdf` whenever you update it,
    keeping the same filename so the link never breaks.
+5. **Update the date** in the footer of `index.html` when you make real changes.
+
+## A note on what is public
+
+Once Pages is enabled, every file on the published branch is fetchable by URL —
+including this README at `/README.md`. Nothing here is sensitive, but if you add
+notes you would rather not have read, keep them out of this branch.
