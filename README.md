@@ -16,11 +16,18 @@ media/              put project screenshots / GIFs here
 1. Go to **https://github.com/hvnsel/portfolioZHANG** → **Settings** → **Pages**
    (left sidebar).
 2. Under **Build and deployment → Source**, choose **Deploy from a branch**.
-3. Pick the branch you want to publish and the folder **/ (root)**, then **Save**.
+3. In the branch dropdown pick **`claude/beautiful-sagan-bxrglq`** (that is
+   where these files live, and it is this repo's default branch), set the
+   folder to **/ (root)**, then **Save**.
 4. Wait ~60 seconds, then reload the Pages settings page. The URL appears at
    the top: **https://hvnsel.github.io/portfolioZHANG/**
 
 Every push to that branch redeploys automatically.
+
+That branch name is ugly. If it bothers you, rename it first:
+**Settings → Branches → the pencil icon next to the default branch → `main`**.
+Then set Pages to publish from `main`, and locally run
+`git branch -m claude/beautiful-sagan-bxrglq main && git fetch && git branch -u origin/main main`.
 
 ### Getting a cleaner URL
 
