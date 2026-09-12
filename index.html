@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hansel Zhang</title>
+<meta name="description" content="Hansel Zhang — aerospace engineering undergraduate at Georgia Tech working on robotics, autonomy, and simulation.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="masthead">
+  <h1>Hansel Zhang</h1>
+  <p class="contact">
+    <a href="mailto:hzhang993@gatech.edu">hzhang993@gatech.edu</a>
+    <span class="dot">·</span>
+    <a href="HanselZhang_CV.pdf">CV (PDF)</a>
+    <!-- Add these once you have them:
+    <span class="dot">·</span> <a href="https://github.com/hvnsel">GitHub</a>
+    <span class="dot">·</span> <a href="https://scholar.google.com/citations?user=YOURID">Google Scholar</a>
+    -->
+  </p>
+  <nav>
+    <a href="#about">About</a>
+    <a href="#research">Research</a>
+    <a href="#writing">Writing</a>
+    <a href="#experience">Experience</a>
+    <a href="#skills">Skills</a>
+  </nav>
+</header>
+
+<main>
+
+<!-- ============================================================
+     ABOUT — this is the one paragraph every admissions reader
+     will actually read. Rewrite it in your own voice.
+     ============================================================ -->
+<section id="about">
+  <p class="lede">
+    I am an undergraduate in aerospace engineering at Georgia Tech, working on the parts of
+    autonomy that have to survive contact with the physical world.
+  </p>
+  <p>
+    My research runs across four labs and one theme: making robots that reason about
+    physics they cannot fully model. That has meant writing a GPU material point method
+    solver for deformable lunar soil, opening up vision&ndash;language&ndash;action policies to find
+    the features that actually drive their actions, recovering governing equations of
+    vibrating structures directly from data, and allocating construction tasks across a
+    rover fleet under precedence constraints. I also fly things: I build the landing
+    control stack for Georgia Tech Propulsive Landers.
+  </p>
+  <p>
+    I am applying to PhD programs in robotics and autonomy.
+  </p>
+</section>
+
+<!-- ============================================================
+     RESEARCH — most recent first. Each entry: what the problem
+     was, what YOU built, and what it showed.
+     ============================================================ -->
+<section id="research">
+  <h2>Research</h2>
+
+  <article class="entry">
+    <h3>Deformable Terrain Simulation for Rover Excavation</h3>
+    <p class="meta">
+      Aerospace Systems Design Laboratory, Georgia Tech
+      <span class="dot">·</span> Advisor: J. McNabb
+      <span class="when">May 2026 &ndash; present</span>
+    </p>
+    <!-- A screenshot or GIF of the simulator would carry this section.
+         Drop the file in media/ and uncomment:
+    <figure>
+      <img src="media/terrain-sim.png" alt="Rover excavating deformable terrain in simulation">
+      <figcaption>Coupled MPM soil and rigid-body rover, simulated on GPU.</figcaption>
+    </figure>
+    -->
+    <ul>
+      <li>Wrote a material point method (MPM) solver from scratch on the NVIDIA Warp API for
+        high-fidelity, GPU-accelerated deformable soil.</li>
+      <li>Built a Python interface coupling the Warp soil solver with NVIDIA PhysX, giving
+        bidirectional contact-force transfer between deformable terrain and articulated robots
+        inside a single simulation loop.</li>
+      <li>Implemented a reinforcement learning pipeline that trains rovers on excavation tasks
+        in the coupled simulator.</li>
+    </ul>
+  </article>
+
+  <article class="entry">
+    <h3>Feature-Level Interpretability of a Vision&ndash;Language&ndash;Action Model</h3>
+    <p class="meta">
+      Trustworthy Robotics Lab, Georgia Tech
+      <span class="dot">·</span> Advisor: G. Chou
+      <span class="when">May 2026 &ndash; present</span>
+    </p>
+    <ul>
+      <li>Used TopK sparse autoencoders to find interpretable features in OpenVLA, OpenVLA-OFT,
+        MiniVLA, WorldVLA, and &pi;0.5 that causally drive actions, verified by closed-loop
+        ablation and additive steering across the LIBERO suites.</li>
+      <li>Ranked recovered features by causal contribution to the emitted action, with no human
+        labeling required.</li>
+      <li>Identified general features that fire at grasp and at release, alongside specialists
+        tied to a single trajectory phase or skill.</li>
+      <li>Showed that a near-constant baseline contributes to the commanded action independently
+        of the interpretable features.</li>
+    </ul>
+  </article>
+
+  <article class="entry">
+    <h3>Symbolic Discovery of Structural Dynamics Equations</h3>
+    <p class="meta">
+      Moore Dynamics and Analytics Laboratory, Georgia Tech
+      <span class="dot">·</span> Advisor: K. Moore
+      <span class="when">Jan 2026 &ndash; present</span>
+    </p>
+    <ul>
+      <li>Extended deep symbolic regression &mdash; a transformer proposing candidate equations under
+        a reinforcement learning objective &mdash; to recover coupled equations of motion for
+        multi-degree-of-freedom structures directly from vibration response.</li>
+      <li>Replaced the binary expression-tree representation with n-ary trees carrying implicit
+        constants, cutting tokens per equation and extending the model's reach to more complex
+        expressions.</li>
+      <li>Reformulated the training reward around a work&ndash;energy balance residual, making small
+        dissipative terms observable to model selection.</li>
+      <li>Recovered governing equations from experimental data on both single- and
+        multi-degree-of-freedom systems, including a coupled linear&ndash;nonlinear oscillator rig.</li>
+    </ul>
+  </article>
+
+  <article class="entry">
+    <h3>Multi-Agent Task Allocation for Lunar Surface Construction</h3>
+    <p class="meta">
+      Aerospace Systems Design Laboratory, Georgia Tech
+      <span class="dot">·</span> Advisor: J. McNabb
+      <span class="when">Jan &ndash; May 2026</span>
+    </p>
+    <ul>
+      <li>Adapted the consensus-based bundle algorithm (CBBA) to a discrete, agent-based
+        simulation of lunar base construction, allocating tasks across a rover fleet under task
+        precedence constraints.</li>
+      <li>Preserved CBBA's convergence guarantee under the added constraints by enforcing
+        diminishing marginal gain across each bundle and using agent IDs as deterministic
+        tiebreakers.</li>
+      <li>Encoded task precedence as a directed acyclic graph partitioned into tiers, running CBBA
+        to convergence within each tier and avoiding restrictive time-window formulations.</li>
+      <li>Validated assignment with 4&ndash;10 agents and 10&ndash;30 tasks.</li>
+    </ul>
+  </article>
+</section>
+
+<section id="writing">
+  <h2>Manuscripts in Preparation</h2>
+  <ol class="pubs">
+    <li>
+      <span class="authors">H. Zhang, J. Skifstad, and G. Chou.</span>
+      &ldquo;Causally Attributed Sparse Autoencoder Features in Vision&ndash;Language&ndash;Action Models.&rdquo;
+      <span class="venue">In preparation for ICLR.</span>
+    </li>
+  </ol>
+</section>
+
+<section id="experience">
+  <h2>Other Experience</h2>
+
+  <article class="entry">
+    <h3>Controls Engineer &mdash; Georgia Tech Propulsive Landers</h3>
+    <p class="meta">
+      Georgia Tech
+      <span class="when">Jan 2025 &ndash; present</span>
+    </p>
+    <ul>
+      <li>Built the landing control stack for a propulsively landed vehicle in Rust, running on a
+        Teensy 4.1.</li>
+      <li>Implemented model predictive control for 6-DoF powered descent, re-linearizing the
+        nonlinear vehicle dynamics each control step and forming a quadratic program solved with
+        OSQP under thrust-magnitude and gimbal-angle constraints.</li>
+      <li>Wrote the onboard sensor processing firmware alongside the controller.</li>
+      <li>Validated the stack against a teammate's independent simulator using altered dynamics and
+        wind disturbances absent from the controller's internal model.</li>
+    </ul>
+  </article>
+
+  <article class="entry">
+    <h3>Undergraduate Teaching Assistant &mdash; CS 1371, Computing for Engineers</h3>
+    <p class="meta">
+      College of Computing, Georgia Tech
+      <span class="when">Jan 2025 &ndash; present</span>
+    </p>
+    <ul>
+      <li>Led weekly recitation for a section of ~20 students in a MATLAB-based introductory
+        programming course for engineering majors.</li>
+      <li>Prepared recitation material each week.</li>
+      <li>Held office hours and graded exams across five terms, including summer.</li>
+    </ul>
+  </article>
+</section>
+
+<section id="skills">
+  <h2>Education &amp; Skills</h2>
+
+  <div class="kv">
+    <div class="k">Education</div>
+    <div class="v">
+      B.S. Aerospace Engineering, Georgia Institute of Technology, Aug 2024 &ndash; May 2027<br>
+      GPA 4.00 / 4.00 <span class="dot">·</span> Faculty Honors, 6 semesters
+    </div>
+
+    <div class="k">Languages</div>
+    <div class="v">Python, C++, Rust, MATLAB</div>
+
+    <div class="k">Frameworks</div>
+    <div class="v">PyTorch, NVIDIA Warp, Isaac Sim</div>
+
+    <div class="k">Coursework</div>
+    <div class="v">
+      Robotics and Autonomy (Optimal Control, Model Predictive Control, Machine Learning,
+      Reinforcement Learning, State Estimation in progress) <span class="dot">·</span>
+      Control System Analysis and Design <span class="dot">·</span>
+      System Dynamics and Vibration <span class="dot">·</span>
+      Spacecraft Flight Dynamics <span class="dot">·</span>
+      Probability and Statistics <span class="dot">·</span>
+      Deformable Bodies <span class="dot">·</span>
+      Structural Analysis <span class="dot">·</span>
+      Differential Equations <span class="dot">·</span>
+      Linear Algebra <span class="dot">·</span>
+      Multivariable Calculus
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <p>
+    <a href="HanselZhang_CV.pdf">Download CV</a>
+    <span class="dot">·</span>
+    <a href="mailto:hzhang993@gatech.edu">hzhang993@gatech.edu</a>
+  </p>
+  <p class="updated">Last updated September 2026</p>
+</footer>
+
+</body>
+</html>

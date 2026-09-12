@@ -1,0 +1,227 @@
+/* ---------------------------------------------------------------
+   Hansel Zhang — portfolio
+   One file, no dependencies. Change the colors below and the whole
+   site follows.
+   --------------------------------------------------------------- */
+
+:root {
+  --bg:        #fdfdfb;
+  --text:      #1b1b1a;
+  --muted:     #6d6d68;
+  --rule:      #e2e1dc;
+  --accent:    #1f4d7a;
+  --accent-bg: #eef3f8;
+  --measure:   44rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg:        #16171a;
+    --text:      #e6e5e1;
+    --muted:     #9b9a94;
+    --rule:      #2c2e33;
+    --accent:    #8fb6e0;
+    --accent-bg: #1d2530;
+  }
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  padding: 0 1.5rem;
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto,
+               "Helvetica Neue", Arial, sans-serif;
+  font-size: 16.5px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+}
+a:hover { border-bottom-color: var(--accent); }
+
+.dot { color: var(--muted); margin: 0 0.4em; }
+
+/* --- masthead ------------------------------------------------- */
+
+.masthead {
+  max-width: var(--measure);
+  margin: 0 auto;
+  padding: 4.5rem 0 0;
+}
+
+.masthead h1 {
+  margin: 0;
+  font-family: Georgia, "Iowan Old Style", "Times New Roman", serif;
+  font-size: clamp(2rem, 6vw, 2.6rem);
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  line-height: 1.15;
+}
+
+.contact {
+  margin: 0.6rem 0 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.masthead nav {
+  margin-top: 1.75rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--rule);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 1.5rem;
+  font-size: 0.85rem;
+  letter-spacing: 0.03em;
+}
+.masthead nav a { color: var(--muted); }
+.masthead nav a:hover { color: var(--accent); }
+
+/* --- sections ------------------------------------------------- */
+
+main {
+  max-width: var(--measure);
+  margin: 0 auto;
+}
+
+section { margin: 3.25rem 0; }
+
+section h2 {
+  margin: 0 0 1.75rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid var(--rule);
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--muted);
+}
+
+#about { margin-top: 2.75rem; }
+
+.lede {
+  font-size: 1.15rem;
+  line-height: 1.55;
+  margin: 0 0 1.1rem;
+}
+
+p { margin: 0 0 1.1rem; }
+
+/* --- entries -------------------------------------------------- */
+
+.entry { margin-bottom: 2.5rem; }
+.entry:last-child { margin-bottom: 0; }
+
+.entry h3 {
+  margin: 0 0 0.25rem;
+  font-size: 1.06rem;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.meta {
+  margin: 0 0 0.75rem;
+  font-size: 0.88rem;
+  color: var(--muted);
+}
+.meta .when {
+  display: block;
+  margin-top: 0.1rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.entry ul {
+  margin: 0;
+  padding-left: 1.1rem;
+}
+.entry li {
+  margin-bottom: 0.45rem;
+  padding-left: 0.2rem;
+}
+.entry li::marker { color: var(--muted); }
+
+/* --- figures (project images) --------------------------------- */
+
+figure {
+  margin: 1rem 0 1.25rem;
+}
+figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+}
+figcaption {
+  margin-top: 0.5rem;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+/* --- publications --------------------------------------------- */
+
+.pubs {
+  margin: 0;
+  padding-left: 1.3rem;
+}
+.pubs li { margin-bottom: 0.8rem; }
+.authors { font-weight: 600; }
+.venue { color: var(--muted); }
+
+/* --- key/value block ------------------------------------------ */
+
+.kv {
+  display: grid;
+  grid-template-columns: 8.5rem 1fr;
+  gap: 0.9rem 1.5rem;
+  font-size: 0.95rem;
+}
+.kv .k {
+  color: var(--muted);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding-top: 0.22rem;
+}
+
+/* --- footer --------------------------------------------------- */
+
+footer {
+  max-width: var(--measure);
+  margin: 4rem auto 0;
+  padding: 1.25rem 0 4rem;
+  border-top: 1px solid var(--rule);
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+footer p { margin: 0 0 0.3rem; }
+.updated { font-size: 0.82rem; }
+
+/* --- small screens -------------------------------------------- */
+
+@media (max-width: 34rem) {
+  body { padding: 0 1.15rem; }
+  .masthead { padding-top: 3rem; }
+  .kv {
+    grid-template-columns: 1fr;
+    gap: 0.2rem 0;
+  }
+  .kv .v { margin-bottom: 0.9rem; }
+}
+
+/* --- print ---------------------------------------------------- */
+
+@media print {
+  body { font-size: 11pt; color: #000; background: #fff; }
+  .masthead nav, footer { display: none; }
+  a { color: #000; }
+}
