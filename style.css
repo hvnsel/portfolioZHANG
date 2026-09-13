@@ -146,11 +146,11 @@ main { max-width: var(--page); margin: 0 auto; }
   align-items: center;
 }
 
-.block .media { grid-row: 1; grid-column: 1; }
-.block .prose { grid-row: 1; grid-column: 2; }
+.block > .media { grid-row: 1; grid-column: 1; }
+.block > .prose { grid-row: 1; grid-column: 2; }
 
-.block:nth-child(even) .media { grid-column: 2; }
-.block:nth-child(even) .prose { grid-column: 1; }
+.block:nth-child(even) > .media { grid-column: 2; }
+.block:nth-child(even) > .prose { grid-column: 1; }
 
 .media img,
 .media video {
@@ -231,10 +231,10 @@ footer p { margin: 0; }
     gap: 1.1rem;
   }
   /* media always on top once stacked, whatever the alternation says */
-  .block .media,
-  .block:nth-child(even) .media { grid-row: 1; grid-column: 1; }
-  .block .prose,
-  .block:nth-child(even) .prose { grid-row: 2; grid-column: 1; }
+  .block > .media,
+  .block:nth-child(even) > .media { grid-row: 1; grid-column: 1; }
+  .block > .prose,
+  .block:nth-child(even) > .prose { grid-row: 2; grid-column: 1; }
 
   .media-row { grid-template-columns: 1fr; }
 
