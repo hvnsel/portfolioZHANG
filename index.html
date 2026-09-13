@@ -4,221 +4,280 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Hansel Zhang</title>
-<meta name="description" content="Hansel Zhang — aerospace engineering undergraduate at Georgia Tech working on robotics, autonomy, and simulation.">
+<meta name="description" content="Hansel Zhang — aerospace engineering undergraduate at Georgia Tech. Robotics, autonomy, and simulation.">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <header class="masthead">
   <h1>Hansel Zhang</h1>
-  <p class="contact">
-    <a href="mailto:hzhang993@gatech.edu">hzhang993@gatech.edu</a>
-    <span class="dot">·</span>
-    <a href="HanselZhang_CV.pdf">CV (PDF)</a>
-  </p>
-  <nav>
-    <a href="#about">About</a>
-    <a href="#research">Research</a>
-    <a href="#writing">Writing</a>
-    <a href="#experience">Experience</a>
-    <a href="#skills">Skills</a>
+  <p class="contact"><a href="mailto:hzhang993@gatech.edu">hzhang993@gatech.edu</a></p>
+  <nav class="tabs">
+    <a href="#about" data-tab="about">About</a>
+    <a href="#research" data-tab="research">Research</a>
+    <a href="#cv" data-tab="cv">CV</a>
   </nav>
 </header>
 
 <main>
 
-<section id="about">
+<!-- ═══ ABOUT ═══ -->
+<section class="panel" id="panel-about">
   <p class="lede">
-    I am an undergraduate in aerospace engineering at Georgia Tech, working on the parts of
-    autonomy that have to survive contact with the physical world.
+    I am an undergraduate in aerospace engineering at Georgia Tech. I work on autonomy for
+    machines that have to touch the world &mdash; robots that dig, land, and grasp, where the
+    physics is messy and the model is never quite right.
   </p>
   <p>
-    My research runs across four labs and one theme: making robots that reason about
-    physics they cannot fully model. That has meant writing a GPU material point method
-    solver for deformable lunar soil, opening up vision&ndash;language&ndash;action policies to find
-    the features that actually drive their actions, recovering governing equations of
-    vibrating structures directly from data, and allocating construction tasks across a
-    rover fleet under precedence constraints. I also fly things: I build the landing
-    control stack for Georgia Tech Propulsive Landers.
-  </p>
-  <p>
-    I am applying to PhD programs in robotics and autonomy.
+    That has pulled me across four labs: GPU simulation of deformable terrain, interpretability
+    of vision&ndash;language&ndash;action policies, symbolic recovery of structural dynamics, and
+    multi-agent task allocation. I also build the landing control stack for Georgia Tech
+    Propulsive Landers. I am applying to PhD programs in robotics and autonomy.
   </p>
 </section>
 
-<section id="research">
-  <h2>Research</h2>
+<!-- ═══ RESEARCH ═══ -->
+<section class="panel" id="panel-research" hidden>
 
-  <article class="entry">
-    <h3>Deformable Terrain Simulation for Rover Excavation</h3>
-    <p class="meta">
-      Aerospace Systems Design Laboratory, Georgia Tech
-      <span class="dot">·</span> Advisor: J. McNabb
-      <span class="when">May 2026 &ndash; present</span>
-    </p>
-    <ul>
-      <li>Wrote a material point method (MPM) solver from scratch on the NVIDIA Warp API for
-        high-fidelity, GPU-accelerated deformable soil.</li>
-      <li>Built a Python interface coupling the Warp soil solver with NVIDIA PhysX, giving
-        bidirectional contact-force transfer between deformable terrain and articulated robots
-        inside a single simulation loop.</li>
-      <li>Implemented a reinforcement learning pipeline that trains rovers on excavation tasks
-        in the coupled simulator.</li>
-    </ul>
-  </article>
-
-  <article class="entry">
-    <h3>Feature-Level Interpretability of a Vision&ndash;Language&ndash;Action Model</h3>
-    <p class="meta">
-      Trustworthy Robotics Lab, Georgia Tech
-      <span class="dot">·</span> Advisor: G. Chou
-      <span class="when">May 2026 &ndash; present</span>
-    </p>
-    <ul>
-      <li>Used TopK sparse autoencoders to find interpretable features in OpenVLA, OpenVLA-OFT,
-        MiniVLA, WorldVLA, and &pi;0.5 that causally drive actions, verified by closed-loop
-        ablation and additive steering across the LIBERO suites.</li>
-      <li>Ranked recovered features by causal contribution to the emitted action, with no human
-        labeling required.</li>
-      <li>Identified general features that fire at grasp and at release, alongside specialists
-        tied to a single trajectory phase or skill.</li>
-      <li>Showed that a near-constant baseline contributes to the commanded action independently
-        of the interpretable features.</li>
-    </ul>
-  </article>
-
-  <article class="entry">
-    <h3>Symbolic Discovery of Structural Dynamics Equations</h3>
-    <p class="meta">
-      Moore Dynamics and Analytics Laboratory, Georgia Tech
-      <span class="dot">·</span> Advisor: K. Moore
-      <span class="when">Jan 2026 &ndash; present</span>
-    </p>
-    <ul>
-      <li>Extended deep symbolic regression &mdash; a transformer proposing candidate equations under
-        a reinforcement learning objective &mdash; to recover coupled equations of motion for
-        multi-degree-of-freedom structures directly from vibration response.</li>
-      <li>Replaced the binary expression-tree representation with n-ary trees carrying implicit
-        constants, cutting tokens per equation and extending the model's reach to more complex
-        expressions.</li>
-      <li>Reformulated the training reward around a work&ndash;energy balance residual, making small
-        dissipative terms observable to model selection.</li>
-      <li>Recovered governing equations from experimental data on both single- and
-        multi-degree-of-freedom systems, including a coupled linear&ndash;nonlinear oscillator rig.</li>
-    </ul>
-  </article>
-
-  <article class="entry">
-    <h3>Multi-Agent Task Allocation for Lunar Surface Construction</h3>
-    <p class="meta">
-      Aerospace Systems Design Laboratory, Georgia Tech
-      <span class="dot">·</span> Advisor: J. McNabb
-      <span class="when">Jan &ndash; May 2026</span>
-    </p>
-    <ul>
-      <li>Adapted the consensus-based bundle algorithm (CBBA) to a discrete, agent-based
-        simulation of lunar base construction, allocating tasks across a rover fleet under task
-        precedence constraints.</li>
-      <li>Preserved CBBA's convergence guarantee under the added constraints by enforcing
-        diminishing marginal gain across each bundle and using agent IDs as deterministic
-        tiebreakers.</li>
-      <li>Encoded task precedence as a directed acyclic graph partitioned into tiers, running CBBA
-        to convergence within each tier and avoiding restrictive time-window formulations.</li>
-      <li>Validated assignment with 4&ndash;10 agents and 10&ndash;30 tasks.</li>
-    </ul>
-  </article>
-</section>
-
-<section id="writing">
-  <h2>Manuscripts in Preparation</h2>
-  <ol class="pubs">
-    <li>
-      <span class="authors">H. Zhang, J. Skifstad, and G. Chou.</span>
-      &ldquo;Causally Attributed Sparse Autoencoder Features in Vision&ndash;Language&ndash;Action Models.&rdquo;
-      <span class="venue">In preparation for ICLR.</span>
-    </li>
-  </ol>
-</section>
-
-<section id="experience">
-  <h2>Other Experience</h2>
-
-  <article class="entry">
-    <h3>Controls Engineer &mdash; Georgia Tech Propulsive Landers</h3>
-    <p class="meta">
-      Georgia Tech
-      <span class="when">Jan 2025 &ndash; present</span>
-    </p>
-    <ul>
-      <li>Built the landing control stack for a propulsively landed vehicle in Rust, running on a
-        Teensy 4.1.</li>
-      <li>Implemented model predictive control for 6-DoF powered descent, re-linearizing the
-        nonlinear vehicle dynamics each control step and forming a quadratic program solved with
-        OSQP under thrust-magnitude and gimbal-angle constraints.</li>
-      <li>Wrote the onboard sensor processing firmware alongside the controller.</li>
-      <li>Validated the stack against a teammate's independent simulator using altered dynamics and
-        wind disturbances absent from the controller's internal model.</li>
-    </ul>
-  </article>
-
-  <article class="entry">
-    <h3>Undergraduate Teaching Assistant &mdash; CS 1371, Computing for Engineers</h3>
-    <p class="meta">
-      College of Computing, Georgia Tech
-      <span class="when">Jan 2025 &ndash; present</span>
-    </p>
-    <ul>
-      <li>Led weekly recitation for a section of ~20 students in a MATLAB-based introductory
-        programming course for engineering majors.</li>
-      <li>Prepared recitation material each week.</li>
-      <li>Held office hours and graded exams across five terms, including summer.</li>
-    </ul>
-  </article>
-</section>
-
-<section id="skills">
-  <h2>Education &amp; Skills</h2>
-
-  <div class="kv">
-    <div class="k">Education</div>
-    <div class="v">
-      B.S. Aerospace Engineering, Georgia Institute of Technology, Aug 2024 &ndash; May 2027<br>
-      GPA 4.00 / 4.00 <span class="dot">·</span> Faculty Honors, 6 semesters
-    </div>
-
-    <div class="k">Languages</div>
-    <div class="v">Python, C++, Rust, MATLAB</div>
-
-    <div class="k">Frameworks</div>
-    <div class="v">PyTorch, NVIDIA Warp, Isaac Sim</div>
-
-    <div class="k">Coursework</div>
-    <div class="v">
-      Robotics and Autonomy (Optimal Control, Model Predictive Control, Machine Learning,
-      Reinforcement Learning, State Estimation in progress) <span class="dot">·</span>
-      Control System Analysis and Design <span class="dot">·</span>
-      System Dynamics and Vibration <span class="dot">·</span>
-      Spacecraft Flight Dynamics <span class="dot">·</span>
-      Probability and Statistics <span class="dot">·</span>
-      Deformable Bodies <span class="dot">·</span>
-      Structural Analysis <span class="dot">·</span>
-      Differential Equations <span class="dot">·</span>
-      Linear Algebra <span class="dot">·</span>
-      Multivariable Calculus
-    </div>
+  <div class="picker">
+    <label for="project-select">Project</label>
+    <select id="project-select">
+      <option value="terrain">Deformable Terrain Simulation for Rover Excavation</option>
+      <option value="vla">Feature-Level Interpretability of a Vision–Language–Action Model</option>
+      <option value="symbolic">Symbolic Discovery of Structural Dynamics Equations</option>
+      <option value="cbba">Multi-Agent Task Allocation for Lunar Surface Construction</option>
+    </select>
   </div>
+
+  <!-- ── Project 1 ── -->
+  <article class="project" id="terrain">
+    <h2>Deformable Terrain Simulation for Rover Excavation</h2>
+    <p class="meta">Aerospace Systems Design Laboratory <span class="dot">·</span> Advisor: J. McNabb <span class="dot">·</span> May 2026 &ndash; present</p>
+    <p class="intro">
+      A rover that digs is a rover in an argument with the ground. Existing simulators treat
+      terrain as rigid, so a policy trained in them has never felt soil yield, pile up, or flow
+      around a bucket. I am building a simulator where it does.
+    </p>
+
+    <div class="blocks">
+      <div class="block">
+        <div class="media"><img src="media/placeholder.svg" alt=""></div>
+        <div class="prose">
+          <h3>A material point method solver, written from scratch</h3>
+          <p>
+            I wrote an MPM solver on the NVIDIA Warp API, which compiles Python kernels down to
+            CUDA. Soil is carried by particles and resolved on a background grid each step, so it
+            can pile, shear, and flow without the mesh tangling that sinks other approaches.
+            Running on the GPU makes it fast enough to train against.
+          </p>
+        </div>
+      </div>
+
+      <div class="block">
+        <div class="media"><img src="media/placeholder.svg" alt=""></div>
+        <div class="prose">
+          <h3>Coupling deformable soil to articulated robots</h3>
+          <p>
+            A soil solver alone cannot simulate a rover. I built a Python interface joining the
+            Warp solver to NVIDIA PhysX so contact forces cross in both directions inside one
+            simulation loop: the bucket pushes the soil, and the soil pushes back on every joint
+            of the arm.
+          </p>
+        </div>
+      </div>
+
+      <div class="block">
+        <div class="media"><img src="media/placeholder.svg" alt=""></div>
+        <div class="prose">
+          <h3>Training excavation policies in the loop</h3>
+          <p>
+            On top of the coupled simulator I built a reinforcement learning pipeline that trains
+            rovers on excavation tasks, so the policy learns against terrain that actually
+            deforms rather than a rigid stand-in.
+          </p>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- ── Project 2 ── -->
+  <article class="project" id="vla" hidden>
+    <h2>Feature-Level Interpretability of a Vision&ndash;Language&ndash;Action Model</h2>
+    <p class="meta">Trustworthy Robotics Lab <span class="dot">·</span> Advisor: G. Chou <span class="dot">·</span> May 2026 &ndash; present</p>
+    <p class="intro">
+      Vision&ndash;language&ndash;action models will pick up a cup when you ask them to, and nobody
+      can say what inside them decided to close the gripper. I look for the internal features that
+      cause the action, and then check the claim by intervening on them.
+    </p>
+
+    <div class="blocks">
+      <div class="block">
+        <div class="media"><img src="media/placeholder.svg" alt=""></div>
+        <div class="prose">
+          <h3>Sparse features, verified by intervention</h3>
+          <p>
+            Using TopK sparse autoencoders, I pull interpretable features out of OpenVLA,
+            OpenVLA-OFT, MiniVLA, WorldVLA, and &pi;0.5. Correlation is not enough, so each
+            candidate is tested in closed loop across the LIBERO suites: ablate it and the
+            behaviour should break, add it back and the behaviour should return.
+          </p>
+        </div>
+      </div>
+
+      <div class="block">
+        <div class="media"><img src="media/placeholder.svg" alt=""></div>
+        <div class="prose">
+          <h3>Ranking features without a human in the loop</h3>
+          <p>
+            Rather than hand-labelling what each feature means, I rank them by measured causal
+            contribution to the emitted action. The ordering falls out of the model's own
+            behaviour, which is what makes the method scale past a handful of features.
+          </p>
+        </div>
+      </div>
+
+      <div class="block">
+        <div class="media"><img src="media/placeholder.svg" alt=""></div>
+        <div class="prose">
+          <h3>Generalists, specialists, and a constant nobody asked for</h3>
+          <p>
+            Some features fire at grasp and at release across every task &mdash; the model has
+            learned a notion of contact. Others are specialists, tied to one phase of one
+            trajectory or one skill. I also found a near-constant baseline that contributes to the
+            commanded action independently of any interpretable feature, which sets a floor on how
+            much of the policy this method can currently explain.
+          </p>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- ── Project 3 ── -->
+  <article class="project" id="symbolic" hidden>
+    <h2>Symbolic Discovery of Structural Dynamics Equations</h2>
+    <p class="meta">Moore Dynamics and Analytics Laboratory <span class="dot">·</span> Advisor: K. Moore <span class="dot">·</span> Jan 2026 &ndash; present</p>
+    <p class="intro">
+      Shake a structure, record how it moves, and recover the equations of motion that produced
+      the data &mdash; not a neural network that mimics them, but the equations themselves. I
+      extended deep symbolic regression to do this for coupled, multi-degree-of-freedom systems.
+    </p>
+
+    <div class="blocks">
+      <div class="block">
+        <div class="media"><img src="media/placeholder.svg" alt=""></div>
+        <div class="prose">
+          <h3>N-ary trees instead of binary ones</h3>
+          <p>
+            Deep symbolic regression has a transformer propose candidate equations under a
+            reinforcement learning objective. The standard binary expression tree spends tokens on
+            structure. Switching to n-ary trees carrying implicit constants cuts the tokens per
+            equation, which extends the model's reach to expressions it previously could not
+            represent.
+          </p>
+        </div>
+      </div>
+
+      <div class="block">
+        <div class="media"><img src="media/placeholder.svg" alt=""></div>
+        <div class="prose">
+          <h3>Rewarding a work&ndash;energy balance</h3>
+          <p>
+            A reward built on trajectory error is dominated by the large terms, so damping and
+            other small dissipative effects are invisible to model selection. I reformulated the
+            reward around a work&ndash;energy balance residual, which makes those terms visible and
+            keeps them in the recovered equation.
+          </p>
+        </div>
+      </div>
+
+      <div class="block">
+        <div class="media"><img src="media/placeholder.svg" alt=""></div>
+        <div class="prose">
+          <h3>Recovery from experimental data</h3>
+          <p>
+            The method recovers governing equations from real measurements, not just simulation:
+            single-degree-of-freedom systems, multi-degree-of-freedom systems, and a coupled
+            linear&ndash;nonlinear oscillator rig.
+          </p>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- ── Project 4 ── -->
+  <article class="project" id="cbba" hidden>
+    <h2>Multi-Agent Task Allocation for Lunar Surface Construction</h2>
+    <p class="meta">Aerospace Systems Design Laboratory <span class="dot">·</span> Advisor: J. McNabb <span class="dot">·</span> Jan &ndash; May 2026</p>
+    <p class="intro">
+      Building a lunar base means a fleet of rovers dividing up work with no dispatcher, where
+      some jobs simply cannot start before others finish. I adapted a decentralised auction
+      algorithm to handle that ordering without giving up its guarantees.
+    </p>
+
+    <div class="blocks">
+      <div class="block">
+        <div class="media"><img src="media/placeholder.svg" alt=""></div>
+        <div class="prose">
+          <h3>CBBA under precedence constraints</h3>
+          <p>
+            The consensus-based bundle algorithm lets agents bid tasks among themselves and
+            converge on an allocation. I adapted it to a discrete, agent-based simulation of base
+            construction &mdash; and kept its convergence guarantee under the added constraints by
+            enforcing diminishing marginal gain across each bundle and breaking ties
+            deterministically on agent ID.
+          </p>
+        </div>
+      </div>
+
+      <div class="block">
+        <div class="media"><img src="media/placeholder.svg" alt=""></div>
+        <div class="prose">
+          <h3>Precedence as a tiered DAG</h3>
+          <p>
+            I encoded task ordering as a directed acyclic graph, partitioned into tiers, with CBBA
+            run to convergence inside each tier before moving to the next. This sidesteps the
+            time-window formulations usually used for precedence, which force you to guess
+            schedules up front.
+          </p>
+        </div>
+      </div>
+
+      <div class="block">
+        <div class="media"><img src="media/placeholder.svg" alt=""></div>
+        <div class="prose">
+          <h3>Validation across fleet sizes</h3>
+          <p>
+            I validated successful assignment across 4&ndash;10 agents and 10&ndash;30 tasks,
+            checking that precedence held and that every task found an owner.
+          </p>
+        </div>
+      </div>
+    </div>
+  </article>
+
+</section>
+
+<!-- ═══ CV ═══ -->
+<section class="panel" id="panel-cv" hidden>
+  <p class="cv-actions">
+    <a href="HanselZhang_CV.pdf" target="_blank" rel="noopener">Open in a new tab</a>
+    <span class="dot">·</span>
+    <a href="HanselZhang_CV.pdf" download>Download PDF</a>
+  </p>
+  <object class="cv-frame" data="HanselZhang_CV.pdf" type="application/pdf">
+    <p class="cv-fallback">
+      Your browser will not display the PDF inline.
+      <a href="HanselZhang_CV.pdf">Open the CV here</a> instead.
+    </p>
+  </object>
 </section>
 
 </main>
 
 <footer>
-  <p>
-    <a href="HanselZhang_CV.pdf">Download CV</a>
-    <span class="dot">·</span>
-    <a href="mailto:hzhang993@gatech.edu">hzhang993@gatech.edu</a>
-  </p>
-  <p class="updated">Last updated September 2026</p>
+  <p><a href="mailto:hzhang993@gatech.edu">hzhang993@gatech.edu</a></p>
 </footer>
 
+<script src="app.js"></script>
 </body>
 </html>

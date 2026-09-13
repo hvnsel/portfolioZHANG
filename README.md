@@ -1,104 +1,128 @@
 # Portfolio site
 
-Plain HTML and CSS. No build step, no framework, no dependencies. You edit
-`index.html`, push, and the live site updates in about a minute.
+Three tabs: **About**, **Research**, **CV**. Plain HTML, CSS and one small JS
+file. No build step, no framework. Edit a file, push, live in about a minute.
 
 ```
 index.html          all the content
 style.css           all the styling (colors are the variables at the top)
-HanselZhang_CV.pdf  linked from the header and footer
-media/              put project screenshots / GIFs here
-.nojekyll           tells GitHub Pages to serve the files as-is
+app.js              tab switching, project dropdown, media handling
+HanselZhang_CV.pdf  displayed in the CV tab
+media/              your images, gifs and videos
+```
+
+## The three things you will actually do
+
+### 1. Swap the CV
+
+Replace `HanselZhang_CV.pdf` with your new one, **keeping the exact same
+filename**. Nothing else to change — the CV tab and its download links all
+point at that name.
+
+### 2. Add media to a research block
+
+Put the file in `media/`, then change one `src` in `index.html`:
+
+```html
+<div class="media"><img src="media/placeholder.svg" alt=""></div>
+```
+
+becomes
+
+```html
+<div class="media"><img src="media/rover-dig.mp4" alt="Rover excavating regolith"></div>
+```
+
+**Always write `<img>`, whatever the file is.** A `.png`, `.jpg` or `.gif` stays
+an image; a `.mp4`, `.webm` or `.mov` is turned into a looping, muted video
+automatically. You never have to think about which tag to use.
+
+`alt` is a short description for screen readers and for when the file fails to
+load. Worth filling in, one line each.
+
+### 3. Edit the words
+
+Every block looks like this:
+
+```html
+<div class="block">
+  <div class="media"><img src="media/placeholder.svg" alt=""></div>
+  <div class="prose">
+    <h3>Short heading for this piece of the work</h3>
+    <p>A paragraph explaining it.</p>
+  </div>
+</div>
+```
+
+Change the heading and the paragraph. That is the whole job.
+
+**The left/right alternation is automatic.** The first block puts media on the
+left, the second on the right, the third on the left, and so on. You do not set
+it anywhere — add, delete or reorder blocks and the pattern re-flows on its own.
+On phones every block stacks with the media on top.
+
+## Adding or removing things
+
+**A block:** copy an entire `<div class="block">…</div>` and paste it inside the
+same `<div class="blocks">`. Delete one by removing the whole `<div
+class="block">` through its closing `</div>`.
+
+**A project:** copy a whole `<article class="project" id="...">…</article>`,
+give it a new `id`, add `hidden` to the opening tag, and add a matching line to
+the dropdown near the top of the Research section:
+
+```html
+<option value="your-new-id">Title as it should appear in the menu</option>
+```
+
+The `value` must match the `id` exactly. That is the only wiring.
+
+## Editing and publishing
+
+```bash
+git add -A
+git commit -m "Add rover simulation video"
+git push
+```
+
+Preview locally first:
+
+```bash
+python3 -m http.server 8000
+# open http://localhost:8000
 ```
 
 ## Putting it on the internet (GitHub Pages, free)
 
-1. Go to **https://github.com/hvnsel/portfolioZHANG** → **Settings** → **Pages**
-   (left sidebar).
-2. Under **Build and deployment → Source**, choose **Deploy from a branch**.
-3. In the branch dropdown pick **`claude/beautiful-sagan-bxrglq`** (that is
-   where these files live, and it is this repo's default branch), set the
-   folder to **/ (root)**, then **Save**.
-4. Wait ~60 seconds, then reload the Pages settings page. The URL appears at
-   the top: **https://hvnsel.github.io/portfolioZHANG/**
+1. **https://github.com/hvnsel/portfolioZHANG** → **Settings** → **Pages**.
+2. **Source** → **Deploy from a branch**.
+3. Branch **`claude/beautiful-sagan-bxrglq`**, folder **/ (root)** → **Save**.
+4. Wait ~60 seconds and reload. The URL appears at the top:
+   **https://hvnsel.github.io/portfolioZHANG/**
 
-Every push to that branch redeploys automatically.
+Pages needs a public repository on a free plan. Every push then redeploys.
 
-That branch name is ugly. If it bothers you, rename it first:
-**Settings → Branches → the pencil icon next to the default branch → `main`**.
-Then set Pages to publish from `main`, and locally run
-`git branch -m claude/beautiful-sagan-bxrglq main && git fetch && git branch -u origin/main main`.
+### A cleaner URL
 
-### Getting a cleaner URL
+- **Free:** create a new repo named exactly `hvnsel.github.io`, copy these files
+  in, enable Pages the same way. Site lives at **https://hvnsel.github.io**.
+- **~$12/year:** buy a domain, then Settings → Pages → **Custom domain**. At your
+  registrar point it at GitHub:
 
-`hvnsel.github.io/portfolioZHANG` works but is long. Two ways to improve it:
+  | Type  | Name | Value           |
+  |-------|------|-----------------|
+  | A     | @    | 185.199.108.153 |
+  | A     | @    | 185.199.109.153 |
+  | A     | @    | 185.199.110.153 |
+  | A     | @    | 185.199.111.153 |
+  | CNAME | www  | hvnsel.github.io |
 
-- **Free:** create a *new* repo named exactly `hvnsel.github.io`, copy these
-  files into it, and enable Pages the same way. The site then lives at
-  **https://hvnsel.github.io** — short enough to put on a CV.
-- **~$12/year:** buy a domain (Namecheap, Cloudflare, Porkbun) such as
-  `hanselzhang.com`. In the repo, Settings → Pages → **Custom domain**, type
-  the domain, save. Then at your registrar add these DNS records:
+  Then tick **Enforce HTTPS**.
 
-  | Type  | Name  | Value                                        |
-  |-------|-------|----------------------------------------------|
-  | A     | @     | 185.199.108.153                              |
-  | A     | @     | 185.199.109.153                              |
-  | A     | @     | 185.199.110.153                              |
-  | A     | @     | 185.199.111.153                              |
-  | CNAME | www   | hvnsel.github.io                             |
+## Notes
 
-  DNS takes anywhere from 10 minutes to a few hours. Then tick
-  **Enforce HTTPS** in the Pages settings.
-
-## Editing
-
-Open `index.html` in any text editor. Each `<section>` is labelled by its `id`
-(`about`, `research`, `writing`, `experience`, `skills`). Change the text, save,
-then:
-
-```bash
-git add -A
-git commit -m "Update research section"
-git push
-```
-
-To preview locally before pushing:
-
-```bash
-python3 -m http.server 8000
-# then open http://localhost:8000
-```
-
-## What to do next
-
-1. **Rewrite the About paragraph** so it reads in your voice: what you work on,
-   and what you want to work on next.
-2. **Add one image per research project** — a simulator frame, a plot, a photo of
-   the lander. Text-only reads like a second copy of the CV. Put the file in
-   `media/` and paste this just after that project's `<p class="meta">`:
-
-   ```html
-   <figure>
-     <img src="media/terrain-sim.png" alt="Rover excavating deformable terrain in simulation">
-     <figcaption>Coupled MPM soil and rigid-body rover, simulated on GPU.</figcaption>
-   </figure>
-   ```
-
-3. **Add links** — GitHub, Scholar, a demo video, the paper once it is posted.
-   Paste inside the `<p class="contact">` block in the header:
-
-   ```html
-   <span class="dot">·</span> <a href="https://github.com/hvnsel">GitHub</a>
-   <span class="dot">·</span> <a href="https://scholar.google.com/citations?user=YOURID">Google Scholar</a>
-   ```
-
-4. **Keep the CV in sync.** Replace `HanselZhang_CV.pdf` whenever you update it,
-   keeping the same filename so the link never breaks.
-5. **Update the date** in the footer of `index.html` when you make real changes.
-
-## A note on what is public
-
-Once Pages is enabled, every file on the published branch is fetchable by URL —
-including this README at `/README.md`. Nothing here is sensitive, but if you add
-notes you would rather not have read, keep them out of this branch.
+- Every file on the published branch is fetchable by URL, this README included.
+  Keep anything you would rather not have read off this branch.
+- The CV tab embeds the PDF inline. Some mobile browsers refuse to render PDFs
+  in a page and will show the "open the CV here" fallback link instead — the
+  download links above the viewer always work.

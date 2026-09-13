@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" role="img" aria-label="Placeholder">
+  <rect width="800" height="500" fill="#e8e7e2"/>
+  <rect x="1" y="1" width="798" height="498" fill="none" stroke="#c9c8c1" stroke-width="2" stroke-dasharray="10 8"/>
+  <g fill="#8d8c85" font-family="system-ui, sans-serif" text-anchor="middle">
+    <text x="400" y="245" font-size="30" font-weight="600">Replace this</text>
+    <text x="400" y="290" font-size="21">image · gif · video</text>
+  </g>
+</svg>
