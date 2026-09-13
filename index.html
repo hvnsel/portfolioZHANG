@@ -76,8 +76,8 @@
         <div class="media"><img src="media/free_soil_demo.gif" alt=""></div>
       </div>
 
-      <div class="block">
-        
+      <div class="block block--stack">
+
         <div class="prose">
           <h3>Coupling deformable soil to articulated robots</h3>
           <p>
@@ -88,9 +88,15 @@
             The sphere deforms the soil pile, and gets lifted as a result of the soil's reaction forces.
           </p>
         </div>
-        <div class="media"><img src="media/sphere_roll_demo.mp4" alt=""></div>
-        <div class="media"><img src="media/sphere_drop_demo.mp4" alt=""></div>
-        <p class="caption">Coupled simulator showing soil reaction to a rolling and a dropped sphere. Validating Newton's Third Law in the simulation.</p>
+        <figure class="media-row">
+          <div class="media">
+            <video src="media/sphere_roll_demo.mp4" autoplay muted loop playsinline preload="metadata"></video>
+          </div>
+          <div class="media">
+            <video src="media/sphere_drop_demo.mp4" autoplay muted loop playsinline preload="metadata"></video>
+          </div>
+          <figcaption class="caption">Coupled simulator showing soil reaction to a rolling and a dropped sphere. Validating Newton's Third Law in the simulation.</figcaption>
+        </figure>
 
         <div class="prose">
           <p>
@@ -98,12 +104,19 @@
             a scoop interacting with the soil, and a rotating excavation wheel engaging with the soil.
           </p>
         </div>
-        <div class="media"><img src="media/bowl_scoop_demo.mp4" alt=""></div>
-        <div class="media"><img src="media/excavator_demo.mp4" alt=""></div>
-        <p class="caption">Proxies for primitive excavation tasks, a scoop and a rotating excavation wheel interacting with the soil. Also validates soil behaving as a viscous fluid by being constrained to a box.</p>
+
+        <figure class="media-row">
+          <div class="media">
+            <video src="media/bowl_scoop_demo.mp4" autoplay muted loop playsinline preload="metadata"></video>
+          </div>
+          <div class="media">
+            <video src="media/excavator_demo.mp4" autoplay muted loop playsinline preload="metadata"></video>
+          </div>
+          <figcaption class="caption">Proxies for primitive excavation tasks, a scoop and a rotating excavation wheel interacting with the soil. Also validates soil behaving as a viscous fluid by being constrained to a box.</figcaption>
+        </figure>
       </div>
 
-      <div class="block">
+      <div class="block block--stack">
         <div class="prose">
           <h3>Training excavation policies in the loop</h3>
           <p>
@@ -115,9 +128,14 @@
             the amount of y distance that it traveled whilst being penalized for lateral movement. It would have to drive over
             soil that was simulated with Newton's ImplicitMPM solver.
           </p>
-          <div class="media"><img src="media/TricycleRLDemoVideo.mp4" alt=""></div>
-          <p class="caption">Basic validation of the reinforcement learning pipeline with a simple vehicle model driving over soil simulated by Newton's ImplicitMPM solver. Trained for 100 epochs with only 4 parallel environments on my laptop.</p>
         </div>
+
+        <figure class="media-row media-row--single">
+          <div class="media">
+            <video src="media/TricycleRLDemoVideo.mp4" autoplay muted loop playsinline preload="metadata"></video>
+          </div>
+          <figcaption class="caption">Basic validation of the reinforcement learning pipeline with a simple vehicle model driving over soil simulated by Newton's ImplicitMPM solver. Trained for 100 epochs with only 4 parallel environments on my laptop.</figcaption>
+        </figure>
       </div>
     </div>
   </article>
