@@ -170,6 +170,12 @@ main { max-width: var(--page); margin: 0 auto; }
 }
 .prose p:last-child { margin-bottom: 0; }
 
+/* continuation paragraphs read as an indented new line, not a new section */
+.prose p + p {
+  margin-top: -0.35rem;
+  text-indent: 1.9rem;
+}
+
 /* --- full-width blocks holding several clips ------------------ */
 
 /* opts a block out of the two-column alternation entirely */
@@ -184,6 +190,13 @@ main { max-width: var(--page); margin: 0 auto; }
   margin: 0;
 }
 .media-row--single { grid-template-columns: 1fr; }
+
+/* clips differ in native aspect ratio, so pin a shared box and letterbox inside it */
+.media-row .media img,
+.media-row .media video {
+  aspect-ratio: 16 / 9;
+  object-fit: contain;
+}
 
 .media-row .caption { grid-column: 1 / -1; }
 

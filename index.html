@@ -65,9 +65,10 @@
           <h3>A material point method solver, written from scratch</h3>
           <p>
             I wrote an MPM solver on the NVIDIA Warp API, which compiles Python kernels down to
-            CUDA. Soil is carried by particles and scattered onto a computational grid each step.The grid is then updated
+            CUDA. Soil is carried by particles and scattered onto a computational grid each step. The grid is then updated
             and the particles are updated based on the grid's state. The grid is then reset for the next step and the process continues.
-            <br>
+          </p>
+          <p>
             Before training excavation policies I needed to ensure that the simulator accurately captured realistic soil behavior
             under gravitational forces, and applied forces. Below is an example of the simulator in action with just gravity acting on the soil.
             There is a looser, less cohesive soil on top of a more dense and compact soil block.
@@ -123,7 +124,8 @@
             On top of the coupled simulator I built a reinforcement learning pipeline that trains
             rovers on excavation tasks. However, NVIDIA released its stable Newton engine capable of native GPU-accelerated physics simulations
             with its own ImplicitMPM solver. I ended up refactoring the codebase and switched to Newton.
-            <br>
+          </p>
+          <p>
             The first test was a basic validation that our pipeline could train a policy. I used a basic vehicle model which was rewarded for
             the amount of y distance that it traveled whilst being penalized for lateral movement. It would have to drive over
             soil that was simulated with Newton's ImplicitMPM solver.
