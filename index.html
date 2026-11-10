@@ -139,8 +139,106 @@
           <figcaption class="caption">Basic validation of the reinforcement learning pipeline with a simple vehicle model driving over soil simulated by Newton's ImplicitMPM solver. Trained for 100 epochs with only 4 parallel environments on my laptop.</figcaption>
         </figure>
       </div>
+
+            <div class="block block--stack">
+        <div class="prose">
+          <h3>Driving to the dig site</h3>
+          <p>
+            The rover is a two-drum regolith excavator, modelled in MuJoCo/Newton and driven over
+            terrain in Isaac Lab. Navigation is split in two. A cost-map planner computes a
+            cost-to-goal field over the terrain heights at the start of each episode, and a
+            reinforcement learning policy, trained with PPO, follows the path traced from that field
+            by commanding wheel speed and steering.
+          </p>
+          <p>
+            I evaluated the policy on six hand-built courses, each built around one kind of obstacle.
+          </p>
+        </div>
+
+        <figure class="media-row">
+          <div class="media">
+            <video src="media/course_boulder.mp4" autoplay muted loop playsinline preload="metadata"></video>
+          </div>
+          <div class="media">
+            <video src="media/course_chicane.mp4" autoplay muted loop playsinline preload="metadata"></video>
+          </div>
+        </figure>
+        <figure class="media-row">
+          <div class="media">
+            <video src="media/course_crater.mp4" autoplay muted loop playsinline preload="metadata"></video>
+          </div>
+          <div class="media">
+            <video src="media/course_field.mp4" autoplay muted loop playsinline preload="metadata"></video>
+          </div>
+        </figure>
+        <figure class="media-row">
+          <div class="media">
+            <video src="media/course_gate.mp4" autoplay muted loop playsinline preload="metadata"></video>
+          </div>
+          <div class="media">
+            <video src="media/course_wall.mp4" autoplay muted loop playsinline preload="metadata"></video>
+          </div>
+          <figcaption class="caption">The navigation policy on the six evaluation courses. Left to right, top to bottom: boulder, chicane, crater, field, gate, and wall.</figcaption>
+        </figure>
+
+        <div class="prose">
+          <p>
+            The same policy on randomly generated terrain, with a new start and goal in each episode.
+          </p>
+        </div>
+
+        <figure class="media-row">
+          <div class="media">
+            <video src="media/nav_01.mp4" autoplay muted loop playsinline preload="metadata"></video>
+          </div>
+          <div class="media">
+            <video src="media/nav_02.mp4" autoplay muted loop playsinline preload="metadata"></video>
+          </div>
+        </figure>
+        <figure class="media-row">
+          <div class="media">
+            <video src="media/nav_03.mp4" autoplay muted loop playsinline preload="metadata"></video>
+          </div>
+          <div class="media">
+            <video src="media/nav_04.mp4" autoplay muted loop playsinline preload="metadata"></video>
+          </div>
+        </figure>
+        <figure class="media-row">
+          <div class="media">
+            <video src="media/nav_05.mp4" autoplay muted loop playsinline preload="metadata"></video>
+          </div>
+          <div class="media">
+            <video src="media/nav_06.mp4" autoplay muted loop playsinline preload="metadata"></video>
+          </div>
+          <figcaption class="caption">Six navigation episodes on randomly generated terrain.</figcaption>
+        </figure>
+      </div>
+
+      <div class="block block--stack">
+        <div class="prose">
+          <h3>A scripted dig pass in two-way coupled soil</h3>
+          <p>
+            At the work site, the rover lowers its front drum to a set cut depth and drives a
+            straight pass while the drum spins. The rear drum stays raised. The soil is Newton's
+            implicit MPM, coupled both ways to the rover, so the drum and chassis feel the soil's
+            reaction while it cuts. The pass is scripted. A learned excavation policy, closing the
+            loop on drum fill and cut depth, is ongoing work.
+          </p>
+        </div>
+
+        <figure class="media-row media-row--single">
+          <div class="media">
+            <video src="media/scripted_dig.mp4" autoplay muted loop playsinline preload="metadata"></video>
+          </div>
+          <figcaption class="caption">A scripted dig pass with the front drum, simulated with Newton's implicit MPM soil two-way coupled to the rover.</figcaption>
+        </figure>
+      </div>
+
     </div>
+    
   </article>
+
+
 
   <!-- ── Project 2 ── -->
   <article class="project" id="vla" hidden>
