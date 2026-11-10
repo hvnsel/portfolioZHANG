@@ -54,7 +54,7 @@
     <h2>Deformable Terrain Simulation for Rover Excavation</h2>
     <p class="meta">Aerospace Systems Design Laboratory <span class="dot">·</span> Advisor: J. McNabb <span class="dot">·</span> May 2026 &ndash; present</p>
     <p class="intro">
-      Motivation: Lunar rovers trained to excavate regolith need to interact realistically with the soil. 
+      Motivation: Lunar rovers trained to excavate regolith need to interact realistically with the soil.
       The policies trained for lunar excavation must know how soil yields, pilesup, or flows. This is because lunar
       missions are critical and cannot afford failures due to unrealistic soil modeling.
     </p>
@@ -157,26 +157,26 @@
 
         <figure class="media-row">
           <div class="media">
-            <video src="media/course_boulder.mp4" data-stagger="courses" muted loop playsinline preload="metadata"></video>
+            <video src="media/course_boulder.mp4" data-stagger="courses" muted loop playsinline preload="auto"></video>
           </div>
           <div class="media">
-            <video src="media/course_chicane.mp4" data-stagger="courses" muted loop playsinline preload="metadata"></video>
-          </div>
-        </figure>
-        <figure class="media-row">
-          <div class="media">
-            <video src="media/course_crater.mp4" data-stagger="courses" muted loop playsinline preload="metadata"></video>
-          </div>
-          <div class="media">
-            <video src="media/course_field.mp4" data-stagger="courses" muted loop playsinline preload="metadata"></video>
+            <video src="media/course_chicane.mp4" data-stagger="courses" muted loop playsinline preload="auto"></video>
           </div>
         </figure>
         <figure class="media-row">
           <div class="media">
-            <video src="media/course_gate.mp4" data-stagger="courses" muted loop playsinline preload="metadata"></video>
+            <video src="media/course_crater.mp4" data-stagger="courses" muted loop playsinline preload="auto"></video>
           </div>
           <div class="media">
-            <video src="media/course_wall.mp4" data-stagger="courses" muted loop playsinline preload="metadata"></video>
+            <video src="media/course_field.mp4" data-stagger="courses" muted loop playsinline preload="auto"></video>
+          </div>
+        </figure>
+        <figure class="media-row">
+          <div class="media">
+            <video src="media/course_gate.mp4" data-stagger="courses" muted loop playsinline preload="auto"></video>
+          </div>
+          <div class="media">
+            <video src="media/course_wall.mp4" data-stagger="courses" muted loop playsinline preload="auto"></video>
           </div>
           <figcaption class="caption">The navigation policy on the six evaluation courses. Left to right, top to bottom: boulder, chicane, crater, field, gate, and wall.</figcaption>
         </figure>
@@ -189,26 +189,26 @@
 
         <figure class="media-row">
           <div class="media">
-            <video src="media/nav_01.mp4" data-stagger="nav" muted loop playsinline preload="metadata"></video>
+            <video src="media/nav_01.mp4" data-stagger="nav" muted loop playsinline preload="auto"></video>
           </div>
           <div class="media">
-            <video src="media/nav_02.mp4" data-stagger="nav" muted loop playsinline preload="metadata"></video>
-          </div>
-        </figure>
-        <figure class="media-row">
-          <div class="media">
-            <video src="media/nav_03.mp4" data-stagger="nav" muted loop playsinline preload="metadata"></video>
-          </div>
-          <div class="media">
-            <video src="media/nav_04.mp4" data-stagger="nav" muted loop playsinline preload="metadata"></video>
+            <video src="media/nav_02.mp4" data-stagger="nav" muted loop playsinline preload="auto"></video>
           </div>
         </figure>
         <figure class="media-row">
           <div class="media">
-            <video src="media/nav_05.mp4" data-stagger="nav" muted loop playsinline preload="metadata"></video>
+            <video src="media/nav_03.mp4" data-stagger="nav" muted loop playsinline preload="auto"></video>
           </div>
           <div class="media">
-            <video src="media/nav_06.mp4" data-stagger="nav" muted loop playsinline preload="metadata"></video>
+            <video src="media/nav_04.mp4" data-stagger="nav" muted loop playsinline preload="auto"></video>
+          </div>
+        </figure>
+        <figure class="media-row">
+          <div class="media">
+            <video src="media/nav_05.mp4" data-stagger="nav" muted loop playsinline preload="auto"></video>
+          </div>
+          <div class="media">
+            <video src="media/nav_06.mp4" data-stagger="nav" muted loop playsinline preload="auto"></video>
           </div>
           <figcaption class="caption">Six navigation episodes on randomly generated terrain.</figcaption>
         </figure>
@@ -235,10 +235,8 @@
       </div>
 
     </div>
-    
+
   </article>
-
-
 
   <!-- ── Project 2 ── -->
   <article class="project" id="vla" hidden>
@@ -419,5 +417,40 @@
 </footer>
 
 <script src="app.js"></script>
+<script>
+// Staggered start for the two groups of six navigation videos. A group starts
+// the first time any of its videos is on screen, one video every STEP_MS in
+// page order. Polling (rather than waiting on an event) also catches the
+// Research tab or the project picker being switched to.
+(function () {
+  var STEP_MS = 1500;
+  var groups = {};
+  document.querySelectorAll('video[data-stagger]').forEach(function (v) {
+    v.muted = true;
+    (groups[v.dataset.stagger] = groups[v.dataset.stagger] || []).push(v);
+  });
+
+  function onScreen(v) {
+    var r = v.getBoundingClientRect();
+    return r.width > 0 && r.height > 0 && r.bottom > 0 && r.top < window.innerHeight;
+  }
+
+  var pending = Object.keys(groups);
+  var timer = setInterval(function () {
+    pending = pending.filter(function (name) {
+      var vids = groups[name];
+      if (!vids.some(onScreen)) return true;
+      vids.forEach(function (v, i) {
+        setTimeout(function () {
+          var p = v.play();
+          if (p && p.catch) p.catch(function () {});
+        }, i * STEP_MS);
+      });
+      return false;
+    });
+    if (!pending.length) clearInterval(timer);
+  }, 250);
+})();
+</script>
 </body>
 </html>
