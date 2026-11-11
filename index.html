@@ -157,26 +157,26 @@
 
         <figure class="media-row">
           <div class="media">
-            <video src="media/course_boulder.mp4" data-stagger="courses" muted loop playsinline preload="auto"></video>
+            <video src="media/course_boulder.mp4" autoplay muted loop playsinline preload="metadata"></video>
           </div>
           <div class="media">
-            <video src="media/course_chicane.mp4" data-stagger="courses" muted loop playsinline preload="auto"></video>
-          </div>
-        </figure>
-        <figure class="media-row">
-          <div class="media">
-            <video src="media/course_crater.mp4" data-stagger="courses" muted loop playsinline preload="auto"></video>
-          </div>
-          <div class="media">
-            <video src="media/course_field.mp4" data-stagger="courses" muted loop playsinline preload="auto"></video>
+            <video src="media/course_chicane.mp4" autoplay muted loop playsinline preload="metadata"></video>
           </div>
         </figure>
         <figure class="media-row">
           <div class="media">
-            <video src="media/course_gate.mp4" data-stagger="courses" muted loop playsinline preload="auto"></video>
+            <video src="media/course_crater.mp4" autoplay muted loop playsinline preload="metadata"></video>
           </div>
           <div class="media">
-            <video src="media/course_wall.mp4" data-stagger="courses" muted loop playsinline preload="auto"></video>
+            <video src="media/course_field.mp4" autoplay muted loop playsinline preload="metadata"></video>
+          </div>
+        </figure>
+        <figure class="media-row">
+          <div class="media">
+            <video src="media/course_gate.mp4" autoplay muted loop playsinline preload="metadata"></video>
+          </div>
+          <div class="media">
+            <video src="media/course_wall.mp4" autoplay muted loop playsinline preload="metadata"></video>
           </div>
           <figcaption class="caption">The navigation policy on the six evaluation courses. Left to right, top to bottom: boulder, chicane, crater, field, gate, and wall.</figcaption>
         </figure>
@@ -189,26 +189,26 @@
 
         <figure class="media-row">
           <div class="media">
-            <video src="media/nav_01.mp4" data-stagger="nav" muted loop playsinline preload="auto"></video>
+            <video src="media/nav_01.mp4" autoplay muted loop playsinline preload="metadata"></video>
           </div>
           <div class="media">
-            <video src="media/nav_02.mp4" data-stagger="nav" muted loop playsinline preload="auto"></video>
-          </div>
-        </figure>
-        <figure class="media-row">
-          <div class="media">
-            <video src="media/nav_03.mp4" data-stagger="nav" muted loop playsinline preload="auto"></video>
-          </div>
-          <div class="media">
-            <video src="media/nav_04.mp4" data-stagger="nav" muted loop playsinline preload="auto"></video>
+            <video src="media/nav_02.mp4" autoplay muted loop playsinline preload="metadata"></video>
           </div>
         </figure>
         <figure class="media-row">
           <div class="media">
-            <video src="media/nav_05.mp4" data-stagger="nav" muted loop playsinline preload="auto"></video>
+            <video src="media/nav_03.mp4" autoplay muted loop playsinline preload="metadata"></video>
           </div>
           <div class="media">
-            <video src="media/nav_06.mp4" data-stagger="nav" muted loop playsinline preload="auto"></video>
+            <video src="media/nav_04.mp4" autoplay muted loop playsinline preload="metadata"></video>
+          </div>
+        </figure>
+        <figure class="media-row">
+          <div class="media">
+            <video src="media/nav_05.mp4" autoplay muted loop playsinline preload="metadata"></video>
+          </div>
+          <div class="media">
+            <video src="media/nav_06.mp4" autoplay muted loop playsinline preload="metadata"></video>
           </div>
           <figcaption class="caption">Six navigation episodes on randomly generated terrain.</figcaption>
         </figure>
@@ -417,40 +417,5 @@
 </footer>
 
 <script src="app.js"></script>
-<script>
-// Staggered start for the two groups of six navigation videos. A group starts
-// the first time any of its videos is on screen, one video every STEP_MS in
-// page order. Polling (rather than waiting on an event) also catches the
-// Research tab or the project picker being switched to.
-(function () {
-  var STEP_MS = 1500;
-  var groups = {};
-  document.querySelectorAll('video[data-stagger]').forEach(function (v) {
-    v.muted = true;
-    (groups[v.dataset.stagger] = groups[v.dataset.stagger] || []).push(v);
-  });
-
-  function onScreen(v) {
-    var r = v.getBoundingClientRect();
-    return r.width > 0 && r.height > 0 && r.bottom > 0 && r.top < window.innerHeight;
-  }
-
-  var pending = Object.keys(groups);
-  var timer = setInterval(function () {
-    pending = pending.filter(function (name) {
-      var vids = groups[name];
-      if (!vids.some(onScreen)) return true;
-      vids.forEach(function (v, i) {
-        setTimeout(function () {
-          var p = v.play();
-          if (p && p.catch) p.catch(function () {});
-        }, i * STEP_MS);
-      });
-      return false;
-    });
-    if (!pending.length) clearInterval(timer);
-  }, 250);
-})();
-</script>
 </body>
 </html>
