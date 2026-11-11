@@ -145,13 +145,14 @@
           <h3>Driving to the dig site</h3>
           <p>
             The rover is a two-drum regolith excavator, modelled in MuJoCo/Newton and driven over
-            terrain in Isaac Lab. Navigation is split in two. A cost-map planner computes a
+            terrain in Isaac Lab. The excavator is inspired by the NASA RASSOR excavator design.
+            Navigation is split in two parts. A cost-map planner computes a
             cost-to-goal field over the terrain heights at the start of each episode, and a
             reinforcement learning policy, trained with PPO, follows the path traced from that field
             by commanding wheel speed and steering.
           </p>
           <p>
-            I evaluated the policy on six hand-built courses, each built around one kind of obstacle.
+            This policy was first tested on six hand-built courses, each built around one kind of obstacle.
           </p>
         </div>
 
@@ -183,7 +184,9 @@
 
         <div class="prose">
           <p>
-            The same policy on randomly generated terrain, with a new start and goal in each episode.
+            The same policy on randomly generated terrain, with a new start and goal in each episode. The green markers 
+            are only visual markers and cannot physically interact with the rover. The terrain is not flat, as it has some small 
+            undulations, and obstacles like craters and boulders.
           </p>
         </div>
 
@@ -218,11 +221,19 @@
         <div class="prose">
           <h3>A scripted dig pass in two-way coupled soil</h3>
           <p>
-            At the work site, the rover lowers its front drum to a set cut depth and drives a
+            At the work site, we assume the navigation policy has placed the rover in line with where it is digging,
+            and at the position where it needs to start digging. This makes digging straightforward which is why we use a scripted
+            digging motion. The rover lowers its front drum to a set cut depth and drives a
             straight pass while the drum spins. The rear drum stays raised. The soil is Newton's
             implicit MPM, coupled both ways to the rover, so the drum and chassis feel the soil's
-            reaction while it cuts. The pass is scripted. A learned excavation policy, closing the
-            loop on drum fill and cut depth, is ongoing work.
+            reaction while it cuts.
+          </p>
+
+          <p>
+            A learned policy is only really justified when soil properties vary substantially within the same site. It is also justified when
+            cohesion, density, and friction are not known before the drum touches the ground.
+            There is currently ongoing work on training a policy that is able to respond to drum fill fraction and 
+            torque felt by the excavating drum.
           </p>
         </div>
 
