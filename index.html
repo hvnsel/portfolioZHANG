@@ -51,101 +51,125 @@
 
   <!-- ── Project 1 ── -->
   <article class="project" id="terrain">
-    <h2>Deformable Terrain Simulation for Rover Excavation</h2>
+    <h2>Lunar Rover Excavation</h2>
     <p class="meta">Aerospace Systems Design Laboratory <span class="dot">·</span> Advisor: J. McNabb <span class="dot">·</span> May 2026 &ndash; present</p>
     <p class="intro">
-      Motivation: Lunar rovers trained to excavate regolith need to interact realistically with the soil.
-      The policies trained for lunar excavation must know how soil yields, pilesup, or flows. This is because lunar
-      missions are critical and cannot afford failures due to unrealistic soil modeling.
+      A lunar base needs trenches and level ground, dug by machines that cannot be driven by hand
+      from Earth. I built a simulated excavation rover that takes a target shape and digs it end to
+      end: a planner decides what to cut next from the measured ground, and two policies trained
+      with reinforcement learning drive the rover and work its digging drum.
     </p>
 
     <div class="blocks">
-      <div class="block">
-        <div class="prose">
-          <h3>A material point method solver, written from scratch</h3>
-          <p>
-            I wrote an MPM solver on the NVIDIA Warp API, which compiles Python kernels down to
-            CUDA. Soil is carried by particles and scattered onto a computational grid each step. The grid is then updated
-            and the particles are updated based on the grid's state. The grid is then reset for the next step and the process continues.
-          </p>
-          <p>
-            Before training excavation policies I needed to ensure that the simulator accurately captured realistic soil behavior
-            under gravitational forces, and applied forces. Below is an example of the simulator in action with just gravity acting on the soil.
-            There is a looser, less cohesive soil on top of a more dense and compact soil block.
-          </p>
-        </div>
-        <div class="media"><img src="media/free_soil_demo.gif" alt=""></div>
-      </div>
 
-      <div class="block block--stack">
-
-        <div class="prose">
-          <h3>Coupling deformable soil to articulated robots</h3>
-          <p>
-            However, a soil solver alone cannot simulate a rover. I built a Python interface joining the
-            Warp solver to NVIDIA PhysX so contact forces could propagate in both directions (Newton's Third Law).
-            In other words, when a body acts on the soil, the body should experience an equal and opposite reaction.
-            Below are example of the coupled simulator in action, showing how the soil pile reacts to a rolling and a dropped sphere.
-            The sphere deforms the soil pile, and gets lifted as a result of the soil's reaction forces.
-          </p>
-        </div>
-        <figure class="media-row">
-          <div class="media">
-            <video src="media/sphere_roll_demo.mp4" autoplay muted loop playsinline preload="metadata"></video>
-          </div>
-          <div class="media">
-            <video src="media/sphere_drop_demo.mp4" autoplay muted loop playsinline preload="metadata"></video>
-          </div>
-          <figcaption class="caption">Coupled simulator showing soil reaction to a rolling and a dropped sphere. Validating Newton's Third Law in the simulation.</figcaption>
-        </figure>
-
-        <div class="prose">
-          <p>
-            I then tested more complex interactions that served as a primitive proxy for excavation tasks. This includes
-            a scoop interacting with the soil, and a rotating excavation wheel engaging with the soil.
-          </p>
-        </div>
-
-        <figure class="media-row">
-          <div class="media">
-            <video src="media/bowl_scoop_demo.mp4" autoplay muted loop playsinline preload="metadata"></video>
-          </div>
-          <div class="media">
-            <video src="media/excavator_demo.mp4" autoplay muted loop playsinline preload="metadata"></video>
-          </div>
-          <figcaption class="caption">Proxies for primitive excavation tasks, a scoop and a rotating excavation wheel interacting with the soil. Also validates soil behaving as a viscous fluid by being constrained to a box.</figcaption>
-        </figure>
-      </div>
-
+      <!-- 1 · HEADLINE RESULT: what a reviewer sees first -->
       <div class="block block--stack">
         <div class="prose">
-          <h3>Training excavation policies in the loop</h3>
+          <h3>A 50 cm trench, dug end to end</h3>
           <p>
-            On top of the coupled simulator I built a reinforcement learning pipeline that trains
-            rovers on excavation tasks. However, NVIDIA released its stable Newton engine capable of native GPU-accelerated physics simulations
-            with its own ImplicitMPM solver. I ended up refactoring the codebase and switched to Newton.
-          </p>
-          <p>
-            The first test was a basic validation that our pipeline could train a policy. I used a basic vehicle model which was rewarded for
-            the amount of y distance that it traveled whilst being penalized for lateral movement. It would have to drive over
-            soil that was simulated with Newton's ImplicitMPM solver.
+            The rover is a two-drum regolith excavator inspired by NASA's RASSOR. Its target here is a
+            trench 10.2 m long and 2.4 m wide that steps down 5 cm every 0.8 m to a 3 m floor at 50 cm,
+            nearly the rover's own 0.6 m height. It chose every cut, drive and dump itself, over
+            [N] simulated hours.
           </p>
         </div>
-
         <figure class="media-row media-row--single">
           <div class="media">
-            <video src="media/TricycleRLDemoVideo.mp4" autoplay muted loop playsinline preload="metadata"></video>
+            <!-- VIDEO: the whole trench being cut (the 50 cm site run's joined clips) -->
+            <video src="media/trench_timelapse.mp4" autoplay muted loop playsinline preload="metadata"></video>
           </div>
-          <figcaption class="caption">Basic validation of the reinforcement learning pipeline with a simple vehicle model driving over soil simulated by Newton's ImplicitMPM solver. Trained for 100 epochs with only 4 parallel environments on my laptop.</figcaption>
+          <figcaption class="caption">The 50 cm trench being cut, at [24]&times; speed.</figcaption>
+        </figure>
+        <figure class="media-row media-row--single">
+          <div class="media">
+            <!-- IMAGE: the finished trench (render_cut.py's _3d.png) -->
+            <img src="media/trench_3d.png" alt="The finished trench in 3D: a staircase of 5 cm steps down to a 50 cm floor.">
+          </div>
+          <figcaption class="caption">The finished trench.</figcaption>
+        </figure>
+        <figure class="media-row media-row--single">
+          <div class="media">
+            <!-- IMAGE: the cross-section with the rover to scale (render_cut.py's _portfolio.png) -->
+            <img src="media/trench_section.png" alt="Cross-section along the trench, true to scale, with the rover drawn to scale on the 50 cm floor.">
+          </div>
+          <figcaption class="caption">Cross-section along the trench, true to scale, with the rover drawn to scale on the floor. The dotted line is ground level.</figcaption>
         </figure>
       </div>
 
+      <!-- 2 · HOW IT WORKS -->
       <div class="block block--stack">
         <div class="prose">
-          <h3>Driving to the dig site</h3>
+          <h3>How it works</h3>
           <p>
-            The rover is a two-drum regolith excavator, modelled in MuJoCo/Newton and driven over
-            terrain in Isaac Lab. The excavator is inspired by the NASA RASSOR excavator design.
+            The work is split by timescale. Before every cut, an excavation planner reads the measured
+            ground and picks which lane to cut next, which way along it and how deep, keeping a staircase
+            the rover can drive down and looking ahead so the whole site can be finished. A task sequencer
+            turns that cut into overlapping dig passes, routes around the site and trips to a spoil pile.
+            Two learned skills do the physical work: a navigation policy drives the routes and a dig
+            policy cuts each pass. After every cut the ground is measured again and the planner picks
+            the next one.
+          </p>
+        </div>
+        <figure class="media-row media-row--single">
+          <div class="media">
+            <img src="media/system_diagram.svg" alt="System diagram: the excavation planner sends the next cut to the task sequencer, which commands the navigation policy, the dig policy and the dump; the simulation returns observations and the measured ground.">
+          </div>
+          <figcaption class="caption">System overview. Orange: learned with PPO. Blue: rule-based. Green: physics and soil.</figcaption>
+        </figure>
+      </div>
+
+      <!-- 3 · THE DIG SKILL: the trained policy -->
+      <div class="block block--stack">
+        <div class="prose">
+          <h3>The dig skill: a policy trained with PPO</h3>
+          <p>
+            The dig policy is given a cut plane, 3 to 8 cm deep and sloping up to about 6&deg;, and
+            has to bring the ground down to it in one 0.6 m pass. It sees a 2.0 &times; 1.6 m height
+            scan around the drum, how far the drum is from the plane, how full the drum is and the
+            state of its arm and shroud, and it sets the drive speed, the arm and the shroud. The
+            drum can only take soil in so fast, so driving faster pushes soil ahead instead of
+            loading it. [One sentence, in your words, on what the policy does about that.]
+          </p>
+        </div>
+      </div>
+
+      <!-- 4 · SOIL MODELS + THE MPM CHECK -->
+      <div class="block block--stack">
+        <div class="prose">
+          <h3>Two soil models: one fast enough to train on, one to check against</h3>
+          <p>
+            Reinforcement learning needs millions of steps, and particle soil is too slow for that:
+            one rover on MPM soil runs at [0.03&ndash;0.06]&times; real time. So the policies train on a
+            soil model I wrote from resistive force theory (RFT). The ground is a 4 cm height grid, and
+            the force on every patch of drum, wheel and frame comes from its depth and its direction of
+            motion; the drum takes soil in at a limited rate and loose soil slumps to its angle of
+            repose. Its force scale is calibrated so the drum meets about the same cutting force as on
+            MPM soil. One rover runs at about real time, and [N] run in parallel for training.
+          </p>
+          <p>
+            To check that the dig policy is not just exploiting the simpler soil, I ran it, unchanged,
+            on particle soil it never saw: Newton's implicit MPM, 240,000 particles 2 cm apart. It
+            finishes the same 5 cm pass, about 1.7&times; slower: 19 s against 11 s.
+          </p>
+        </div>
+        <figure class="media-row">
+          <div class="media">
+            <!-- VIDEO: the trained policy on the RFT soil, 5 cm -->
+            <video src="media/dig_policy_rft.mp4" autoplay muted loop playsinline preload="metadata"></video>
+          </div>
+          <div class="media">
+            <!-- VIDEO: the same policy and command on MPM soil (Luna-Excavator-Excavate-MPM-Check) -->
+            <video src="media/dig_policy_mpm.mp4" autoplay muted loop playsinline preload="metadata"></video>
+          </div>
+          <figcaption class="caption">The same trained policy and the same 5 cm command. Left: the RFT soil it was trained on. Right: MPM soil it never saw.</figcaption>
+        </figure>
+      </div>
+
+      <!-- 5 · THE DRIVE SKILL (your existing navigation content) -->
+      <div class="block block--stack">
+        <div class="prose">
+          <h3>The drive skill: navigation</h3>
+          <p>
             Navigation is split in two parts. A cost-map planner computes a
             cost-to-goal field over the terrain heights at the start of each episode, and a
             reinforcement learning policy, trained with PPO, follows the path traced from that field
@@ -217,32 +241,74 @@
         </figure>
       </div>
 
-      <div class="block block--stack">
+      <!-- 6 · HOW IT STARTED (your existing simulator content, condensed) -->
+      <div class="block">
         <div class="prose">
-          <h3>A scripted dig pass in two-way coupled soil</h3>
+          <h3>How it started: a soil simulator from scratch</h3>
           <p>
-            At the work site, we assume the navigation policy has placed the rover in line with where it is digging,
-            and at the position where it needs to start digging. This makes digging straightforward which is why we use a scripted
-            digging motion. The rover lowers its front drum to a set cut depth and drives a
-            straight pass while the drum spins. The rear drum stays raised. The soil is Newton's
-            implicit MPM, coupled both ways to the rover, so the drum and chassis feel the soil's
-            reaction while it cuts.
-          </p>
-
-          <p>
-            A learned policy is only really justified when soil properties vary substantially within the same site. It is also justified when
-            cohesion, density, and friction are not known before the drum touches the ground.
-            There is currently ongoing work on training a policy that is able to respond to drum fill fraction and
-            torque felt by the excavating drum.
+            I first wrote a material point method (MPM) solver on the NVIDIA Warp API, which compiles
+            Python kernels down to CUDA. Soil is carried by particles and scattered onto a grid each
+            step; the grid is updated, the particles are updated from it, and the grid is reset for
+            the next step. Below, a looser, less cohesive soil settles under gravity on top of a
+            denser block.
           </p>
         </div>
+        <div class="media"><img src="media/free_soil_demo.gif" alt="MPM soil settling under gravity: loose soil on a dense block."></div>
+      </div>
 
+      <div class="block block--stack">
+        <div class="prose">
+          <p>
+            A soil solver alone cannot simulate a rover, so I built a Python interface joining the
+            Warp solver to NVIDIA PhysX, with contact forces passing both ways: when a body pushes on
+            the soil, the soil pushes back on the body.
+          </p>
+        </div>
+        <figure class="media-row">
+          <div class="media">
+            <video src="media/sphere_roll_demo.mp4" autoplay muted loop playsinline preload="metadata"></video>
+          </div>
+          <div class="media">
+            <video src="media/sphere_drop_demo.mp4" autoplay muted loop playsinline preload="metadata"></video>
+          </div>
+          <figcaption class="caption">Two-way coupling: the soil pile deforms under a rolling and a dropped sphere, and lifts them back.</figcaption>
+        </figure>
+        <figure class="media-row">
+          <div class="media">
+            <video src="media/bowl_scoop_demo.mp4" autoplay muted loop playsinline preload="metadata"></video>
+          </div>
+          <div class="media">
+            <video src="media/excavator_demo.mp4" autoplay muted loop playsinline preload="metadata"></video>
+          </div>
+          <figcaption class="caption">First excavation proxies: a scoop and a rotating excavation wheel.</figcaption>
+        </figure>
+        <div class="prose">
+          <p>
+            When NVIDIA released Newton, with GPU physics and its own implicit MPM solver, I moved the
+            codebase onto it. A simple vehicle trained to drive over its soil was the first check that
+            the reinforcement learning pipeline worked end to end.
+          </p>
+        </div>
         <figure class="media-row media-row--single">
           <div class="media">
-            <video src="media/scripted_dig.mp4" autoplay muted loop playsinline preload="metadata"></video>
+            <video src="media/TricycleRLDemoVideo.mp4" autoplay muted loop playsinline preload="metadata"></video>
           </div>
-          <figcaption class="caption">A scripted dig pass with the front drum, simulated with Newton's implicit MPM soil two-way coupled to the rover.</figcaption>
+          <figcaption class="caption">Pipeline check: a simple vehicle driving over implicit MPM soil, trained for 100 epochs with 4 parallel environments on a laptop.</figcaption>
         </figure>
+      </div>
+
+      <!-- 7 · LIMITATIONS AND NEXT STEPS -->
+      <div class="block block--stack">
+        <div class="prose">
+          <h3>Limitations and next steps</h3>
+          <p>
+            Everything here is in simulation, and neither soil model has been checked against real
+            regolith; the RFT forces are calibrated to MPM, not to measurements. [How the dig policy
+            falls short today, for example how often a pass meets the shape tolerance.] [How often
+            the trench run had to put the rover back on its route after a drive stalled.] Next:
+            [what you would study, tied to the research you want to do in a PhD].
+          </p>
+        </div>
       </div>
 
     </div>
