@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1020 572" width="1020" height="572" font-family="Inter, system-ui, -apple-system, Helvetica, Arial, sans-serif">
+<title>Where runs ended, hard starting poses</title>
+<rect width="1020" height="572" fill="#fdfdfb"/>
+<text x="34" y="46" font-size="25" font-weight="600" fill="#1b1b1a">Where runs ended, hard starting poses (% of all runs)</text>
+<rect x="34" y="66" width="15" height="15" rx="2" fill="#9aa3ad"/>
+<text x="57" y="79" font-size="18" fill="#6d6d68">Without steering</text>
+<rect x="224" y="66" width="15" height="15" rx="2" fill="#1f4d7a"/>
+<text x="247" y="79" font-size="18" fill="#6d6d68">With steering</text>
+<line x1="430.0" y1="98" x2="430.0" y2="508" stroke="#dcdbd5" stroke-width="1"/>
+<text x="430.0" y="532" font-size="15" fill="#6d6d68" text-anchor="middle">0</text>
+<line x1="501.4" y1="98" x2="501.4" y2="508" stroke="#dcdbd5" stroke-width="1"/>
+<text x="501.4" y="532" font-size="15" fill="#6d6d68" text-anchor="middle">10</text>
+<line x1="572.9" y1="98" x2="572.9" y2="508" stroke="#dcdbd5" stroke-width="1"/>
+<text x="572.9" y="532" font-size="15" fill="#6d6d68" text-anchor="middle">20</text>
+<line x1="644.3" y1="98" x2="644.3" y2="508" stroke="#dcdbd5" stroke-width="1"/>
+<text x="644.3" y="532" font-size="15" fill="#6d6d68" text-anchor="middle">30</text>
+<line x1="715.7" y1="98" x2="715.7" y2="508" stroke="#dcdbd5" stroke-width="1"/>
+<text x="715.7" y="532" font-size="15" fill="#6d6d68" text-anchor="middle">40</text>
+<line x1="787.1" y1="98" x2="787.1" y2="508" stroke="#dcdbd5" stroke-width="1"/>
+<text x="787.1" y="532" font-size="15" fill="#6d6d68" text-anchor="middle">50</text>
+<line x1="858.6" y1="98" x2="858.6" y2="508" stroke="#dcdbd5" stroke-width="1"/>
+<text x="858.6" y="532" font-size="15" fill="#6d6d68" text-anchor="middle">60</text>
+<line x1="930.0" y1="98" x2="930.0" y2="508" stroke="#dcdbd5" stroke-width="1"/>
+<text x="930.0" y="532" font-size="15" fill="#6d6d68" text-anchor="middle">70</text>
+<text x="34" y="130" font-size="18" fill="#1b1b1a">Succeeded</text>
+<rect x="430" y="112" width="412.1" height="17" rx="2" fill="#9aa3ad"/>
+<text x="849.1" y="126" font-size="15" fill="#6d6d68">57.7</text>
+<rect x="430" y="134" width="453.6" height="17" rx="2" fill="#1f4d7a"/>
+<text x="890.6" y="148" font-size="15" fill="#6d6d68">63.5</text>
+<text x="34" y="188" font-size="18" fill="#1b1b1a">Went for the wrong object</text>
+<rect x="430" y="170" width="139.3" height="17" rx="2" fill="#9aa3ad"/>
+<text x="576.3" y="184" font-size="15" fill="#6d6d68">19.5</text>
+<rect x="430" y="192" width="80.7" height="17" rx="2" fill="#1f4d7a"/>
+<text x="517.7" y="206" font-size="15" fill="#6d6d68">11.3</text>
+<text x="34" y="246" font-size="18" fill="#1b1b1a">Touched the right object, never lifted it</text>
+<rect x="430" y="228" width="65.0" height="17" rx="2" fill="#9aa3ad"/>
+<text x="502.0" y="242" font-size="15" fill="#6d6d68">9.1</text>
+<rect x="430" y="250" width="51.4" height="17" rx="2" fill="#1f4d7a"/>
+<text x="488.4" y="264" font-size="15" fill="#6d6d68">7.2</text>
+<text x="34" y="304" font-size="18" fill="#1b1b1a">Lifted it, never set it down</text>
+<rect x="430" y="286" width="32.9" height="17" rx="2" fill="#9aa3ad"/>
+<text x="469.9" y="300" font-size="15" fill="#6d6d68">4.6</text>
+<rect x="430" y="308" width="41.4" height="17" rx="2" fill="#1f4d7a"/>
+<text x="478.4" y="322" font-size="15" fill="#6d6d68">5.8</text>
+<text x="34" y="362" font-size="18" fill="#1b1b1a">Set it on the right object, task still not done</text>
+<rect x="430" y="344" width="15.7" height="17" rx="2" fill="#9aa3ad"/>
+<text x="452.7" y="358" font-size="15" fill="#6d6d68">2.2</text>
+<rect x="430" y="366" width="34.3" height="17" rx="2" fill="#1f4d7a"/>
+<text x="471.3" y="380" font-size="15" fill="#6d6d68">4.8</text>
+<text x="34" y="420" font-size="18" fill="#1b1b1a">Never opened the drawer (drawer tasks)</text>
+<rect x="430" y="402" width="25.7" height="17" rx="2" fill="#9aa3ad"/>
+<text x="462.7" y="416" font-size="15" fill="#6d6d68">3.6</text>
+<rect x="430" y="424" width="25.7" height="17" rx="2" fill="#1f4d7a"/>
+<text x="462.7" y="438" font-size="15" fill="#6d6d68">3.6</text>
+<text x="34" y="478" font-size="18" fill="#1b1b1a">Other</text>
+<rect x="430" y="460" width="24.3" height="17" rx="2" fill="#9aa3ad"/>
+<text x="461.3" y="474" font-size="15" fill="#6d6d68">3.4</text>
+<rect x="430" y="482" width="27.1" height="17" rx="2" fill="#1f4d7a"/>
+<text x="464.1" y="496" font-size="15" fill="#6d6d68">3.8</text>
+<text x="430" y="562" font-size="15" fill="#6d6d68">% of all runs</text>
+</svg>

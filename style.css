@@ -259,3 +259,121 @@ footer p { margin: 0; }
   .masthead { padding-top: 2.5rem; }
   .tabs { gap: 1.25rem; }
 }
+
+/* --- attention steering: video pairs -------------------------- */
+
+.gallery-title {
+  margin: 0;
+  font-size: 1.02rem;
+  font-weight: 600;
+}
+.gallery-desc,
+.note {
+  margin: 0;
+  max-width: 46rem;
+  font-size: 0.92rem;
+  color: var(--muted);
+}
+.block--stack .gallery-desc { margin-top: 0.4rem; }
+
+.pairs { display: flex; flex-direction: column; gap: 2.25rem; }
+
+.pair { margin: 0; }
+
+.pair-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.9rem;
+}
+
+.vlabel {
+  display: block;
+  margin-bottom: 0.35rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+}
+
+.pair .media video,
+.pair .media img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  display: block;
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  background: var(--rule);
+}
+
+.pair .caption { margin-top: 0.6rem; }
+
+.replay {
+  display: inline-block;
+  margin-left: 0.5rem;
+  padding: 0.1rem 0.5rem;
+  font: inherit;
+  font-size: 0.8rem;
+  color: var(--accent);
+  background: none;
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  cursor: pointer;
+}
+.replay:hover { border-color: var(--accent); }
+
+/* --- results tables ------------------------------------------- */
+
+.table-wrap { overflow-x: auto; }
+
+.rtable {
+  border-collapse: collapse;
+  width: 100%;
+  min-width: 34rem;
+  font-size: 0.9rem;
+  font-variant-numeric: tabular-nums;
+}
+.rtable th,
+.rtable td {
+  padding: 0.5rem 0.8rem 0.5rem 0;
+  text-align: left;
+  border-bottom: 1px solid var(--rule);
+  white-space: nowrap;
+}
+.rtable th {
+  font-size: 0.74rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  border-bottom-color: var(--text);
+}
+.rtable td:nth-child(n+3) { text-align: right; }
+.rtable th:nth-child(n+3) { text-align: right; }
+.rtable--small { font-size: 0.84rem; min-width: 30rem; }
+.rtable--small td:nth-child(n+2),
+.rtable--small th:nth-child(n+2) { text-align: right; }
+
+.tnotes {
+  margin: 0;
+  padding-left: 1.1rem;
+  max-width: 46rem;
+  font-size: 0.88rem;
+  color: var(--muted);
+}
+.tnotes li { margin-bottom: 0.4rem; }
+
+.breakdown { font-size: 0.92rem; }
+.breakdown > summary {
+  cursor: pointer;
+  color: var(--accent);
+  font-size: 0.9rem;
+}
+.breakdown[open] > summary { margin-bottom: 1.1rem; }
+.breakdown .note { margin-top: 0.8rem; }
+
+@media (max-width: 34rem) {
+  .pair-grid { gap: 0.5rem; }
+  .vlabel { font-size: 0.66rem; letter-spacing: 0.06em; }
+}

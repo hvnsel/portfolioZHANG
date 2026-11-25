@@ -75,6 +75,41 @@
     showProject(select.value);
   }
 
+  /* --- video pairs: start together, and replay on demand --- */
+
+  function restartPair(pairEl) {
+    var vids = pairEl.querySelectorAll('video');
+    for (var i = 0; i < vids.length; i++) {
+      try { vids[i].currentTime = 0; } catch (e) {}
+    }
+    for (var j = 0; j < vids.length; j++) {
+      var p = vids[j].play();
+      if (p && p.catch) p.catch(function () {});
+    }
+  }
+
+  var replays = document.querySelectorAll('.replay');
+  for (var r = 0; r < replays.length; r++) {
+    replays[r].addEventListener('click', function (ev) {
+      var pairEl = ev.target.closest('.pair');
+      if (pairEl) restartPair(pairEl);
+    });
+  }
+
+  /* once both clips of a pair can play, line them up on the same frame */
+  var pairs = document.querySelectorAll('.pair');
+  for (var q = 0; q < pairs.length; q++) {
+    (function (pairEl) {
+      var vids = pairEl.querySelectorAll('video');
+      var ready = 0;
+      for (var k = 0; k < vids.length; k++) {
+        vids[k].addEventListener('loadeddata', function () {
+          if (++ready === vids.length) restartPair(pairEl);
+        });
+      }
+    })(pairs[q]);
+  }
+
   upgradeVideos();
   fromHash();
 })();

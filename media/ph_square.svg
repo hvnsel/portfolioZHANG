@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" width="600" height="600" font-family="system-ui, sans-serif">
+  <rect width="600" height="600" fill="#e8e7e2"/>
+  <rect x="1.5" y="1.5" width="597" height="597" fill="none" stroke="#c3c2bb" stroke-width="3" stroke-dasharray="12 10"/>
+  <g fill="#8d8c85" text-anchor="middle">
+    <text x="300" y="286" font-size="30" font-weight="600">Video not added yet</text>
+    <text x="300" y="330" font-size="22">square MP4, H.264</text>
+  </g>
+</svg>

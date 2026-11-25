@@ -45,7 +45,7 @@
       <option value="terrain">Lunar Rover Excavation</option>
       <option value="vla">Feature-Level Interpretability of a Vision–Language–Action Model</option>
       <option value="symbolic">Symbolic Discovery of Structural Dynamics Equations</option>
-      <option value="cbba">Multi-Agent Task Allocation for Lunar Surface Construction</option>
+      <option value="steering">Steering a robot&rsquo;s attention onto the right object</option>
     </select>
   </div>
 
@@ -526,53 +526,301 @@
   </article>
 
   <!-- ── Project 4 ── -->
-  <article class="project" id="cbba" hidden>
-    <h2>Multi-Agent Task Allocation for Lunar Surface Construction</h2>
-    <p class="meta">Aerospace Systems Design Laboratory <span class="dot">·</span> Advisor: J. McNabb <span class="dot">·</span> Jan &ndash; May 2026</p>
+  <article class="project" id="steering" hidden>
+    <h2>Steering a robot&rsquo;s attention onto the right object</h2>
+    <p class="meta">Trustworthy Robotics Lab <span class="dot">&middot;</span> Advisor: G. Chou <span class="dot">&middot;</span> May 2026 &ndash; present</p>
     <p class="intro">
-      Building a lunar base means a fleet of rovers dividing up work with no dispatcher, where
-      some jobs simply cannot start before others finish. I adapted a decentralised auction
-      algorithm to handle that ordering without giving up its guarantees.
+      A robot model that sees through cameras and follows written instructions can still reach for
+      the wrong object when its scene is disturbed. We change where the model looks while it runs,
+      with no retraining: part of its attention is moved onto the object it is supposed to handle.
+      Below, the same robot faces the same disturbed scenes, first without steering and then with it.
     </p>
 
     <div class="blocks">
-      <div class="block">
-        <div class="media"><img src="media/placeholder.svg" alt=""></div>
+
+      <div class="block block--stack">
         <div class="prose">
-          <h3>CBBA under precedence constraints</h3>
           <p>
-            The consensus-based bundle algorithm lets agents bid tasks among themselves and
-            converge on an allocation. I adapted it to a discrete, agent-based simulation of base
-            construction &mdash; and kept its convergence guarantee under the added constraints by
-            enforcing diminishing marginal gain across each bundle and breaking ties
-            deterministically on agent ID.
+            Each pair shows the same scene, starting position and randomness. Left: the model as it
+            is. Right: the same model with attention steering. These are examples where steering
+            changed what the robot did.
           </p>
+        </div>
+
+        <h3 class="gallery-title">Shuffled object layouts</h3>
+        <p class="gallery-desc">
+          The objects on the table are rearranged. These are layouts the model usually fails.
+        </p>
+        <div class="pairs">
+        <figure class="pair">
+          <div class="pair-grid">
+            <div class="media">
+              <span class="vlabel">Without steering</span>
+              <video src="media/layout_1_without.mp4" poster="media/ph_square.svg" autoplay muted loop playsinline preload="metadata"></video>
+            </div>
+            <div class="media">
+              <span class="vlabel">With steering</span>
+              <video src="media/layout_1_with.mp4" poster="media/ph_square.svg" autoplay muted loop playsinline preload="metadata"></video>
+            </div>
+          </div>
+          <figcaption class="caption">
+            &ldquo;[instruction].&rdquo; Without steering: goes for [wrong object] first. With steering: goes to [right object] first.
+            <button class="replay" type="button">Replay pair</button>
+          </figcaption>
+        </figure>
+        <figure class="pair">
+          <div class="pair-grid">
+            <div class="media">
+              <span class="vlabel">Without steering</span>
+              <video src="media/layout_2_without.mp4" poster="media/ph_square.svg" autoplay muted loop playsinline preload="metadata"></video>
+            </div>
+            <div class="media">
+              <span class="vlabel">With steering</span>
+              <video src="media/layout_2_with.mp4" poster="media/ph_square.svg" autoplay muted loop playsinline preload="metadata"></video>
+            </div>
+          </div>
+          <figcaption class="caption">
+            &ldquo;[instruction].&rdquo; Without steering: goes for [wrong object] first. With steering: goes to [right object] first.
+            <button class="replay" type="button">Replay pair</button>
+          </figcaption>
+        </figure>
+        <figure class="pair">
+          <div class="pair-grid">
+            <div class="media">
+              <span class="vlabel">Without steering</span>
+              <video src="media/layout_3_without.mp4" poster="media/ph_square.svg" autoplay muted loop playsinline preload="metadata"></video>
+            </div>
+            <div class="media">
+              <span class="vlabel">With steering</span>
+              <video src="media/layout_3_with.mp4" poster="media/ph_square.svg" autoplay muted loop playsinline preload="metadata"></video>
+            </div>
+          </div>
+          <figcaption class="caption">
+            &ldquo;[instruction].&rdquo; Without steering: goes for [wrong object] first. With steering: goes to [right object] first.
+            <button class="replay" type="button">Replay pair</button>
+          </figcaption>
+        </figure>
+        <figure class="pair">
+          <div class="pair-grid">
+            <div class="media">
+              <span class="vlabel">Without steering</span>
+              <video src="media/layout_4_without.mp4" poster="media/ph_square.svg" autoplay muted loop playsinline preload="metadata"></video>
+            </div>
+            <div class="media">
+              <span class="vlabel">With steering</span>
+              <video src="media/layout_4_with.mp4" poster="media/ph_square.svg" autoplay muted loop playsinline preload="metadata"></video>
+            </div>
+          </div>
+          <figcaption class="caption">
+            &ldquo;[instruction].&rdquo; Without steering: goes for [wrong object] first. With steering: goes to [right object] first.
+            <button class="replay" type="button">Replay pair</button>
+          </figcaption>
+        </figure>
+        </div>
+        <p class="note">
+          With steering, the gripper reaches the right object first much more often. In these layouts
+          it then usually still fails to finish the task (see the results).
+        </p>
+
+        <h3 class="gallery-title">Hard starting poses</h3>
+        <p class="gallery-desc">
+          The robot arm starts from an unusual position, at the two hardest of the benchmark&rsquo;s
+          five levels.
+        </p>
+        <div class="pairs">
+        <figure class="pair">
+          <div class="pair-grid">
+            <div class="media">
+              <span class="vlabel">Without steering</span>
+              <video src="media/start_1_without.mp4" poster="media/ph_square.svg" autoplay muted loop playsinline preload="metadata"></video>
+            </div>
+            <div class="media">
+              <span class="vlabel">With steering</span>
+              <video src="media/start_1_with.mp4" poster="media/ph_square.svg" autoplay muted loop playsinline preload="metadata"></video>
+            </div>
+          </div>
+          <figcaption class="caption">
+            &ldquo;[instruction].&rdquo; Without steering: [what goes wrong]. With steering: [what it does].
+            <button class="replay" type="button">Replay pair</button>
+          </figcaption>
+        </figure>
+        <figure class="pair">
+          <div class="pair-grid">
+            <div class="media">
+              <span class="vlabel">Without steering</span>
+              <video src="media/start_2_without.mp4" poster="media/ph_square.svg" autoplay muted loop playsinline preload="metadata"></video>
+            </div>
+            <div class="media">
+              <span class="vlabel">With steering</span>
+              <video src="media/start_2_with.mp4" poster="media/ph_square.svg" autoplay muted loop playsinline preload="metadata"></video>
+            </div>
+          </div>
+          <figcaption class="caption">
+            &ldquo;[instruction].&rdquo; Without steering: [what goes wrong]. With steering: [what it does].
+            <button class="replay" type="button">Replay pair</button>
+          </figcaption>
+        </figure>
+        <figure class="pair">
+          <div class="pair-grid">
+            <div class="media">
+              <span class="vlabel">Without steering</span>
+              <video src="media/start_3_without.mp4" poster="media/ph_square.svg" autoplay muted loop playsinline preload="metadata"></video>
+            </div>
+            <div class="media">
+              <span class="vlabel">With steering</span>
+              <video src="media/start_3_with.mp4" poster="media/ph_square.svg" autoplay muted loop playsinline preload="metadata"></video>
+            </div>
+          </div>
+          <figcaption class="caption">
+            &ldquo;[instruction].&rdquo; Without steering: [what goes wrong]. With steering: [what it does].
+            <button class="replay" type="button">Replay pair</button>
+          </figcaption>
+        </figure>
+        <figure class="pair">
+          <div class="pair-grid">
+            <div class="media">
+              <span class="vlabel">Without steering</span>
+              <video src="media/start_4_without.mp4" poster="media/ph_square.svg" autoplay muted loop playsinline preload="metadata"></video>
+            </div>
+            <div class="media">
+              <span class="vlabel">With steering</span>
+              <video src="media/start_4_with.mp4" poster="media/ph_square.svg" autoplay muted loop playsinline preload="metadata"></video>
+            </div>
+          </div>
+          <figcaption class="caption">
+            &ldquo;[instruction].&rdquo; Without steering: [what goes wrong]. With steering: [what it does].
+            <button class="replay" type="button">Replay pair</button>
+          </figcaption>
+        </figure>
         </div>
       </div>
 
-      <div class="block">
-        <div class="media"><img src="media/placeholder.svg" alt=""></div>
+      <div class="block block--stack">
         <div class="prose">
-          <h3>Precedence as a tiered DAG</h3>
+          <h3>Results</h3>
           <p>
-            I encoded task ordering as a directed acyclic graph, partitioned into tiers, with CBBA
-            run to convergence inside each tier before moving to the next. This sidesteps the
-            time-window formulations usually used for precedence, which force you to guess
-            schedules up front.
+            Changes are in percentage points. The 95% range shows how far the change could plausibly
+            be off. When the whole range is above zero, the improvement is unlikely to be chance.
           </p>
+        </div>
+        <div class="table-wrap">
+          <table class="rtable">
+            <tr><th>Disturbance</th><th>Measure</th><th>Without steering</th><th>With steering</th><th>Change</th><th>95% range</th></tr>
+            <tr><td>Hard starting poses</td><td>Task success</td><td>57.7%</td><td>63.5%</td><td>+5.8</td><td>+1.7 to +10.1</td></tr>
+            <tr><td>Hard starting poses</td><td>Right first touch</td><td>69.0%</td><td>79.3%</td><td>+10.3</td><td>&ndash;</td></tr>
+            <tr><td>Shuffled layouts</td><td>Right first touch</td><td>&ndash;</td><td>&ndash;</td><td>+17.8</td><td>+9.6 to +26.7</td></tr>
+            <tr><td>Shuffled layouts</td><td>Task success</td><td>&ndash;</td><td>&ndash;</td><td>+0.7</td><td>&minus;2.1 to +3.4</td></tr>
+          </table>
+        </div>
+        <ul class="tnotes">
+          <li><strong>Right first touch:</strong> the first object the gripper touches is the one the
+            instruction named. It is read from the simulator&rsquo;s contact data.</li>
+          <li><strong>Hard starting poses:</strong> the two hardest levels of the robot-starting-position
+            disturbance in LIBERO-Plus, across three task families: LIBERO-Goal, LIBERO-Object and
+            LIBERO-Spatial.</li>
+          <li><strong>Shuffled layouts:</strong> object-layout disturbances in the LIBERO-Goal tasks,
+            mostly at the two hardest levels. Only layouts the model fails without steering were
+            tested, so only the change is shown.</li>
+        </ul>
+        <details class="breakdown">
+          <summary>Show breakdown: task success under hard starting poses, by group</summary>
+          <div class="table-wrap">
+            <table class="rtable rtable--small">
+            <tr><th>Group</th><th>Without steering</th><th>With steering</th><th>Change</th><th>95% range</th></tr>
+            <tr><td>All</td><td>57.7%</td><td>63.5%</td><td>+5.8</td><td>+1.7 to +10.1</td></tr>
+            <tr><td>LIBERO-Goal</td><td>45.5%</td><td>51.8%</td><td>+6.2</td><td>&minus;0.9 to +14.3</td></tr>
+            <tr><td>LIBERO-Object</td><td>55.9%</td><td>62.8%</td><td>+6.9</td><td>+0.0 to +13.8</td></tr>
+            <tr><td>LIBERO-Spatial</td><td>72.4%</td><td>75.9%</td><td>+3.4</td><td>&minus;3.4 to +10.3</td></tr>
+            <tr><td>Level 4</td><td>64.1%</td><td>72.5%</td><td>+8.4</td><td>+3.0 to +14.4</td></tr>
+            <tr><td>Level 5</td><td>53.4%</td><td>57.4%</td><td>+4.0</td><td>&minus;1.6 to +10.0</td></tr>
+            </table>
+          </div>
+          <p class="note">
+            Each group on its own is smaller, so its range is wider. Only &ldquo;All&rdquo; and
+            &ldquo;Level 4&rdquo; stay above zero.
+          </p>
+        </details>
+      </div>
+
+      <div class="block block--stack">
+        <div class="prose">
+          <h3>How it works</h3>
+          <ul>
+            <li>The robot model is &pi;0.5, an open vision-language-action model from Physical
+              Intelligence. It looks through two cameras, one facing the table and one on the gripper.
+              It reads the instruction and outputs arm motions.</li>
+            <li>The part of the model that produces the motions uses attention. At every decision,
+              each of its attention heads spreads its focus over small patches of the camera images.</li>
+            <li>Some heads naturally focus on the object the robot is about to handle. We use those
+              heads: 12 for the table camera and 20 for the gripper camera.</li>
+            <li><strong>Steering.</strong> Before every decision, we take the object the robot should
+              be handling right now: first the object to pick up, then the place to put it. In the
+              chosen heads, we move 90% of the attention that sits elsewhere in the image onto that
+              object&rsquo;s patches.
+              <ul>
+                <li>Each head keeps the same total attention on each camera.</li>
+                <li>Attention on the gripper itself is left alone.</li>
+                <li>When the gripper camera can&rsquo;t see the object, its heads are steered toward
+                  the edge of the image on the object&rsquo;s side.</li>
+              </ul>
+            </li>
+            <li>Nothing is retrained. The model&rsquo;s weights don&rsquo;t change; only where it
+              looks is changed, while it runs.</li>
+            <li>The object&rsquo;s location comes from the simulator.</li>
+          </ul>
+        </div>
+        <figure class="media-row media-row--single">
+          <div class="media">
+            <img src="media/diagram_steering.svg" alt="Attention steering: the table camera, gripper camera and instruction feed the vision-language part of the model, which feeds the action part's attention heads, which produce arm motion. From below, the simulator supplies where the target object is, and steering moves attention onto that object's patches in 12 table heads and 20 gripper heads. Only the attention in chosen heads changes; no weights change.">
+          </div>
+        </figure>
+      </div>
+
+      <div class="block block--stack">
+        <div class="prose">
+          <h3>What steering fixes, and what it doesn&rsquo;t</h3>
+          <ul>
+            <li>Under hard starting poses, the most common failure without steering is going for the
+              wrong object: nearly half of all failures. Steering cut those failures by 42%.</li>
+            <li>That is where the success gain comes from. Failures that happen after the robot reaches
+              the right object (grasping, carrying, placing) went up and down about equally with
+              steering.</li>
+            <li>On shuffled layouts, steering also redirected the reach: right first touch rose by 17.8
+              percentage points. But the runs it redirected then failed at the grasp, so task success
+              did not change.</li>
+            <li>In runs where steering did not prevent a wrong reach, it was active the whole time, and
+              those runs started out no differently from the runs it fixed. What makes the difference
+              is still an open question.</li>
+          </ul>
+        </div>
+        <figure class="media-row media-row--single">
+          <div class="media">
+            <img src="media/chart_where_runs_ended.svg" alt="Grouped horizontal bars of where runs ended under hard starting poses, as a percentage of all runs, without and with steering: succeeded 57.7 and 63.5; went for the wrong object 19.5 and 11.3; touched the right object, never lifted it 9.1 and 7.2; lifted it, never set it down 4.6 and 5.8; set it on the right object, task still not done 2.2 and 4.8; never opened the drawer 3.6 and 3.6; other 3.4 and 3.8.">
+          </div>
+          <figcaption class="caption">
+            Steering shrinks the &ldquo;went for the wrong object&rdquo; bar. The other changes are
+            within what chance alone produces.
+          </figcaption>
+        </figure>
+      </div>
+
+      <div class="block block--stack">
+        <div class="prose">
+          <h3>Limitations</h3>
+          <ul>
+            <li>The steering is told where the object is by the simulator. A real robot would have to
+              find the object itself.</li>
+            <li>The success gain is modest, and it was found for one disturbance (hard starting poses)
+              at its two hardest levels. On shuffled layouts, task success did not change. In an
+              exploratory test with blurred cameras, steering had no effect.</li>
+            <li>The starting-pose disturbance came out milder than the benchmark describes. When a
+              scene is loaded, the arm is reset to its usual pose and only moves partway toward the
+              disturbed pose before the model starts. This is the same with and without steering.</li>
+            <li>All results are in simulation.</li>
+          </ul>
         </div>
       </div>
 
-      <div class="block">
-        <div class="media"><img src="media/placeholder.svg" alt=""></div>
-        <div class="prose">
-          <h3>Validation across fleet sizes</h3>
-          <p>
-            I validated successful assignment across 4&ndash;10 agents and 10&ndash;30 tasks,
-            checking that precedence held and that every task found an owner.
-          </p>
-        </div>
-      </div>
     </div>
   </article>
 
