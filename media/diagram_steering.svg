@@ -4,9 +4,9 @@
 <marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1f4d7a"/></marker></defs>
 <rect width="1400" height="860" fill="#fdfdfb"/>
 <rect x="40" y="118" width="250" height="74" rx="6" fill="#f1f0ec" stroke="#c9c8c1" stroke-width="1.5"/>
-<text x="165" y="162" font-size="21" text-anchor="middle" fill="#1b1b1a">Table camera</text>
+<text x="165" y="162" font-size="21" text-anchor="middle" fill="#1b1b1a">Main camera</text>
 <rect x="40" y="214" width="250" height="74" rx="6" fill="#f1f0ec" stroke="#c9c8c1" stroke-width="1.5"/>
-<text x="165" y="258" font-size="21" text-anchor="middle" fill="#1b1b1a">Gripper camera</text>
+<text x="165" y="258" font-size="21" text-anchor="middle" fill="#1b1b1a">Wrist camera</text>
 <rect x="40" y="310" width="250" height="74" rx="6" fill="#f1f0ec" stroke="#c9c8c1" stroke-width="1.5"/>
 <text x="165" y="341" font-size="19" text-anchor="middle" fill="#1b1b1a">"put the bowl</text>
 <text x="165" y="367" font-size="19" text-anchor="middle" fill="#1b1b1a">on the plate"</text>
@@ -17,7 +17,7 @@
 <rect x="720" y="170" width="300" height="160" rx="6" fill="#fff" stroke="#c9c8c1" stroke-width="1.5"/>
 <text x="870" y="244" font-size="21" text-anchor="middle" fill="#1b1b1a" font-weight="600">Action part:</text>
 <text x="870" y="270" font-size="21" text-anchor="middle" fill="#1b1b1a" font-weight="600">attention heads</text>
-<text x="870" y="306" font-size="17" text-anchor="middle" fill="#6d6d68">12 table heads · 20 gripper heads</text>
+<text x="870" y="306" font-size="17" text-anchor="middle" fill="#6d6d68">12 main heads · 20 wrist heads</text>
 <rect x="1090" y="206" width="270" height="88" rx="6" fill="#fff" stroke="#c9c8c1" stroke-width="1.5"/>
 <text x="1225" y="257" font-size="21" text-anchor="middle" fill="#1b1b1a" font-weight="600">Arm motion</text>
 <line x1="292" y1="155" x2="356" y2="230" stroke="#6d6d68" stroke-width="2.5" marker-end="url(#a)"/>

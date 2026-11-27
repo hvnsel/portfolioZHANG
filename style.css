@@ -275,8 +275,12 @@ footer p { margin: 0; }
   color: var(--muted);
 }
 .block--stack .gallery-desc { margin-top: 0.4rem; }
+/* these set margin:0 above, which beats the stack's * + * rule; restore the rhythm */
+.block--stack .legend { margin-top: 1.5rem; }
+.block--stack .gallery-title { margin-top: 2.75rem; }
+.block--stack .note { margin-top: 1.5rem; }
 
-.pairs { display: flex; flex-direction: column; gap: 2.25rem; }
+.pairs { display: flex; flex-direction: column; gap: 2.75rem; }
 
 .pair { margin: 0; }
 
@@ -308,7 +312,34 @@ footer p { margin: 0; }
   background: var(--rule);
 }
 
-.pair .caption { margin-top: 0.6rem; }
+/* caption sits above the clips, so the task is read before watching */
+.pair > .caption { margin: 0 0 0.75rem; }
+
+/* a beat between pairs, so they read in twos rather than as one long strip */
+.pair + .pair {
+  border-top: 1px solid var(--rule);
+  padding-top: 2.75rem;
+}
+
+.legend {
+  margin: 0;
+  max-width: 46rem;
+  font-size: 0.92rem;
+  color: var(--muted);
+}
+.key { white-space: nowrap; color: var(--text); }
+.key::before {
+  content: "";
+  display: inline-block;
+  width: 0.7rem;
+  height: 0.7rem;
+  margin-right: 0.3rem;
+  border-radius: 2px;
+  vertical-align: baseline;
+}
+.key--blue::before  { background: #4a90d9; }
+.key--red::before   { background: #d9534f; }
+.key--green::before { background: #35a853; }
 
 .replay {
   display: inline-block;
