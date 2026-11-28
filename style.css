@@ -279,7 +279,7 @@ footer p { margin: 0; }
 .block--stack .legend { margin-top: 1.5rem; }
 .block--stack .gallery-title { margin-top: 2.75rem; }
 .block--stack .note { margin-top: 1.5rem; }
-.block--stack .feat-group { margin-top: 2.5rem; }
+.block--stack .feat-group { margin-top: 3.25rem; }
 .block--stack .feat { margin-top: 1.9rem; }
 
 .pairs { display: flex; flex-direction: column; gap: 2.75rem; }
@@ -475,11 +475,13 @@ footer p { margin: 0; }
 
 .feat-group {
   margin: 2.5rem 0 0;
-  font-size: 0.72rem;
-  font-weight: 600;
+  padding-bottom: 0.45rem;
+  border-bottom: 2px solid var(--text);
+  font-size: 1.45rem;
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.14em;
-  color: var(--muted);
+  letter-spacing: 0.05em;
+  color: var(--text);
 }
 
 .feat { margin: 0; }

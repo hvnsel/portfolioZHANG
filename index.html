@@ -633,45 +633,51 @@
     <p class="meta">Trustworthy Robotics Lab <span class="dot">·</span> Advisor: G. Chou <span class="dot">·</span> May 2026 &ndash; present</p>
     <p class="intro">
       Vision&ndash;language&ndash;action models will pick up a cup when you ask them to, and nobody
-      can say what inside them decided to close the gripper. I look for the internal features that
-      cause the action, and then check the claim by intervening on them.
+      can say what inside them decided to close the gripper. I split the policy&rsquo;s internal state
+      into features, measure exactly how much each one moved the action, and sort them by how many
+      different tasks they act across.
     </p>
 
     <div class="blocks">
       <div class="block block--stack">
         <div class="prose">
-          <h3>Sparse features, verified by intervention</h3>
+          <h3>How the features are found</h3>
           <p>
-            Using TopK sparse autoencoders, I pull interpretable features out of OpenVLA,
-            OpenVLA-OFT, MiniVLA, WorldVLA, and &pi;0.5. Correlation is not enough, so each
-            candidate is tested in closed loop across the LIBERO suites: ablate it and the
-            behaviour should break, add it back and the behaviour should return.
+            The policy is run over the LIBERO robot benchmark in simulation, and at every decision its
+            internal state is recorded at the point where that state is turned into an action. A sparse
+            autoencoder is trained on those states: it learns 2048 features (1792 for MiniVLA) and rewrites
+            each state using only the hundred that respond most strongly to it.
+          </p>
+          <p>
+            The step from the internal state to the action has a few non-linear parts. Fixing each of them at
+            the value it actually took on that decision splits the action exactly into one term per feature,
+            plus a constant. A feature&rsquo;s term is its causal contribution to that action &mdash; not how
+            strongly it switched on, but how much it moved what the robot did.
           </p>
         </div>
       </div>
 
       <div class="block block--stack">
         <div class="prose">
-          <h3>Ranking features without a human in the loop</h3>
+          <h3>Sorting them from specialist to general</h3>
           <p>
-            Rather than hand-labelling what each feature means, I rank them by measured causal
-            contribution to the emitted action. The ordering falls out of the model's own
-            behaviour, which is what makes the method scale past a handful of features.
+            Adding a feature&rsquo;s contribution up task by task shows where it matters. Its breadth is the
+            participation ratio of those per-task totals: 1 if everything sits in a single task, and the
+            number of tasks if it is spread evenly. Breadth does not depend on how large the contributions
+            are.
+          </p>
+          <p>
+            On its own, breadth is entangled with two simpler things &mdash; how strong a feature is and how
+            often it fires. A feature that is on almost all the time looks broad for that reason alone. So
+            breadth, strength and firing rate are each turned into ranks, breadth&rsquo;s rank is fitted
+            against the other two, and what is left over is the adjusted breadth. Sorting by it and cutting
+            into ten equal groups puts the most specialist features at one end and the most general at the
+            other. Below are examples from each end.
           </p>
         </div>
       </div>
 
       <div class="block block--stack">
-        <div class="prose">
-          <h3>Generalists, specialists, and a constant nobody asked for</h3>
-          <p>
-            Some features fire at grasp and at release across every task &mdash; the model has
-            learned a notion of contact. Others are specialists, tied to one phase of one
-            trajectory or one skill. I also found a near-constant baseline that contributes to the
-            commanded action independently of any interpretable feature, which sets a floor on how
-            much of the policy this method can currently explain.
-          </p>
-        </div>
         <p class="note">
           Each strip is eight decisions where one feature contributed most to the action, in two blocks
           of four, with the main camera above the wrist camera in each block. For &pi;0.5 and MiniVLA
@@ -728,7 +734,7 @@
         </figure>
       </div>
     </div>
-  </article>
+</article>
   <!-- ── Project 4 ── -->
   <article class="project" id="symbolic" hidden>
     <h2>Symbolic Discovery of Structural Dynamics Equations</h2>
