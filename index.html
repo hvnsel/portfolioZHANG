@@ -673,24 +673,36 @@
           </p>
         </div>
         <p class="note">
-          Four features from &pi;0.5. Each panel is the frames that activate one feature most strongly, with
-          the main camera above and the wrist camera below.
+          Each strip is the four decisions where one feature contributed most to the action, with the
+          main camera above and the wrist camera below. The task count is how many different tasks the
+          feature acts across.
         </p>
-        <figure class="plotfig">
-          <img class="plot" src="media/portfolio_vla_features/feature_0197_general_grasping.png" alt="Feature 197, a general feature: the sixteen frames that activate it most strongly, main camera above and wrist camera below, every one of them the gripper closing on an object.">
-          <figcaption class="caption">Feature 197 (general) &mdash; grasping. Its strongest frames span 34 tasks.</figcaption>
+        <h4 class="feat-group">General</h4>
+        <figure class="feat">
+          <figcaption class="feat-head">feature 1039 <span>&middot; MiniVLA &middot; 90 tasks</span></figcaption>
+          <img class="plot" src="media/portfolio_vla_features/f1039_minivla_general.png" alt="Feature 1039 on MiniVLA: the four frames where it contributes most, main camera above and wrist camera below, each one the gripper closing on an object.">
+          <p class="caption">Grasping.</p>
         </figure>
-        <figure class="plotfig">
-          <img class="plot" src="media/portfolio_vla_features/feature_1245_general.png" alt="Feature 1245, a general feature: its strongest frames, main camera above and wrist camera below, the wrist views all showing the gripper fully closed.">
-          <figcaption class="caption">Feature 1245 (general) &mdash; the gripper closed to its fullest extent. Its strongest frames span 23 tasks.</figcaption>
+        <figure class="feat">
+          <figcaption class="feat-head">feature 197 <span>&middot; &pi;0.5 &middot; 34 tasks</span></figcaption>
+          <img class="plot" src="media/portfolio_vla_features/f0197_pi05_general.png" alt="Feature 197 on pi0.5: its four strongest frames, the wrist camera showing the gripper closing on a bottle, a juice carton, a wine bottle and a bowl rim.">
+          <p class="caption">Grasping.</p>
         </figure>
-        <figure class="plotfig">
-          <img class="plot" src="media/portfolio_vla_features/feature_0282_specialist.png" alt="Feature 282, a specialist feature: its strongest frames, all showing the same red box being carried over a basket in one episode.">
-          <figcaption class="caption">Feature 282 (specialist) &mdash; 4 tasks, 15 frames, and the strongest eight are all the same episode.</figcaption>
+        <figure class="feat">
+          <figcaption class="feat-head">feature 1245 <span>&middot; &pi;0.5 &middot; 23 tasks</span></figcaption>
+          <img class="plot" src="media/portfolio_vla_features/f1245_pi05_general.png" alt="Feature 1245 on pi0.5: its four strongest frames, the wrist camera showing the gripper fully closed each time.">
+          <p class="caption">The gripper closed to its fullest extent.</p>
         </figure>
-        <figure class="plotfig">
-          <img class="plot" src="media/portfolio_vla_features/feature_1271_specialist.png" alt="Feature 1271, a specialist feature: its strongest frames, the wrist camera showing the same red-rimmed plate each time.">
-          <figcaption class="caption">Feature 1271 (specialist) &mdash; 8 tasks, 24 frames, and the strongest eight are almost all one episode.</figcaption>
+        <h4 class="feat-group">Specialist</h4>
+        <figure class="feat">
+          <figcaption class="feat-head">feature 1271 <span>&middot; &pi;0.5 &middot; 8 tasks</span></figcaption>
+          <img class="plot" src="media/portfolio_vla_features/f1271_pi05_specialist.png" alt="Feature 1271 on pi0.5: its four strongest frames, all the same red-rimmed plate in one episode.">
+          <p class="caption">One plate, one episode.</p>
+        </figure>
+        <figure class="feat">
+          <figcaption class="feat-head">feature 282 <span>&middot; &pi;0.5 &middot; 4 tasks</span></figcaption>
+          <img class="plot" src="media/portfolio_vla_features/f0282_pi05_specialist.png" alt="Feature 282 on pi0.5: its four strongest frames, all the same red box carried over a basket in one episode.">
+          <p class="caption">One box over one basket, one episode.</p>
         </figure>
       </div>
     </div>

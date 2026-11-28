@@ -279,6 +279,8 @@ footer p { margin: 0; }
 .block--stack .legend { margin-top: 1.5rem; }
 .block--stack .gallery-title { margin-top: 2.75rem; }
 .block--stack .note { margin-top: 1.5rem; }
+.block--stack .feat-group { margin-top: 2.5rem; }
+.block--stack .feat { margin-top: 1.9rem; }
 
 .pairs { display: flex; flex-direction: column; gap: 2.75rem; }
 
@@ -468,3 +470,26 @@ footer p { margin: 0; }
   .eq-label { padding-top: 0; }
   .eq-body { font-size: 0.9rem; }
 }
+
+/* --- feature strips: general vs specialist -------------------- */
+
+.feat-group {
+  margin: 2.5rem 0 0;
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--muted);
+}
+
+.feat { margin: 0; }
+
+.feat-head {
+  margin: 0 0 0.5rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text);
+}
+.feat-head span { font-weight: 400; color: var(--muted); }
+
+.feat .caption { margin: 0.5rem 0 0; }
