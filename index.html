@@ -638,8 +638,7 @@
     </p>
 
     <div class="blocks">
-      <div class="block">
-        <div class="media"><img src="media/placeholder.svg" alt=""></div>
+      <div class="block block--stack">
         <div class="prose">
           <h3>Sparse features, verified by intervention</h3>
           <p>
@@ -651,8 +650,7 @@
         </div>
       </div>
 
-      <div class="block">
-        <div class="media"><img src="media/placeholder.svg" alt=""></div>
+      <div class="block block--stack">
         <div class="prose">
           <h3>Ranking features without a human in the loop</h3>
           <p>
@@ -663,8 +661,7 @@
         </div>
       </div>
 
-      <div class="block">
-        <div class="media"><img src="media/placeholder.svg" alt=""></div>
+      <div class="block block--stack">
         <div class="prose">
           <h3>Generalists, specialists, and a constant nobody asked for</h3>
           <p>
@@ -675,6 +672,26 @@
             much of the policy this method can currently explain.
           </p>
         </div>
+        <p class="note">
+          Four features from &pi;0.5. Each panel is the frames that activate one feature most strongly, with
+          the main camera above and the wrist camera below.
+        </p>
+        <figure class="plotfig">
+          <img class="plot" src="media/portfolio_vla_features/feature_0197_general_grasping.png" alt="Feature 197, a general feature: the sixteen frames that activate it most strongly, main camera above and wrist camera below, every one of them the gripper closing on an object.">
+          <figcaption class="caption">Feature 197 (general) &mdash; grasping. Its strongest frames span 34 tasks.</figcaption>
+        </figure>
+        <figure class="plotfig">
+          <img class="plot" src="media/portfolio_vla_features/feature_1245_general.png" alt="Feature 1245, a general feature: its strongest frames, main camera above and wrist camera below, the wrist views all showing the gripper fully closed.">
+          <figcaption class="caption">Feature 1245 (general) &mdash; the gripper closed to its fullest extent. Its strongest frames span 23 tasks.</figcaption>
+        </figure>
+        <figure class="plotfig">
+          <img class="plot" src="media/portfolio_vla_features/feature_0282_specialist.png" alt="Feature 282, a specialist feature: its strongest frames, all showing the same red box being carried over a basket in one episode.">
+          <figcaption class="caption">Feature 282 (specialist) &mdash; 4 tasks, 15 frames, and the strongest eight are all the same episode.</figcaption>
+        </figure>
+        <figure class="plotfig">
+          <img class="plot" src="media/portfolio_vla_features/feature_1271_specialist.png" alt="Feature 1271, a specialist feature: its strongest frames, the wrist camera showing the same red-rimmed plate each time.">
+          <figcaption class="caption">Feature 1271 (specialist) &mdash; 8 tasks, 24 frames, and the strongest eight are almost all one episode.</figcaption>
+        </figure>
       </div>
     </div>
   </article>
