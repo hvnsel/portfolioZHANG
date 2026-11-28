@@ -414,3 +414,57 @@ footer p { margin: 0; }
   .pair-grid { gap: 0.7rem; }
   .vlabel { font-size: 0.66rem; letter-spacing: 0.06em; }
 }
+
+/* --- simulated-system results: plots and equations ------------ */
+
+.plotfig { margin: 0; }
+
+/* the plots differ a lot in shape, so size them intrinsically and
+   cap the tall ones by height rather than width */
+.plot {
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+  max-height: 78vh;
+  width: auto;
+  height: auto;
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  background: #fff;
+}
+.plotfig .caption { margin: 0.6rem auto 0; }
+
+.eqs { max-width: 46rem; }
+
+.eq {
+  display: grid;
+  grid-template-columns: 6rem 1fr;
+  gap: 0.9rem;
+  padding: 0.7rem 0;
+  border-top: 1px solid var(--rule);
+}
+.eq:last-child { border-bottom: 1px solid var(--rule); }
+
+.eq-label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+  padding-top: 0.3rem;
+}
+
+.eq-body {
+  font-family: Georgia, "Iowan Old Style", "Times New Roman", serif;
+  font-size: 0.95rem;
+  line-height: 1.9;
+  overflow-wrap: break-word;
+}
+.eq-body sup { font-size: 0.72em; }
+.eq-body sub { font-size: 0.72em; }
+
+@media (max-width: 34rem) {
+  .eq { grid-template-columns: 1fr; gap: 0.25rem; }
+  .eq-label { padding-top: 0; }
+  .eq-body { font-size: 0.9rem; }
+}
