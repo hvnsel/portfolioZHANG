@@ -43,9 +43,9 @@
     <label for="project-select">Project</label>
     <select id="project-select">
       <option value="terrain">Lunar Rover Excavation</option>
+      <option value="steering">Steering Attention in a Vision&ndash;Language&ndash;Action Model</option>
       <option value="vla">Feature-Level Interpretability of a Vision–Language–Action Model</option>
       <option value="symbolic">Symbolic Discovery of Structural Dynamics Equations</option>
-      <option value="steering">Steering Attention in a Vision&ndash;Language&ndash;Action Model</option>
     </select>
   </div>
 
@@ -322,210 +322,7 @@
     </div>
 
   </article>
-
   <!-- ── Project 2 ── -->
-  <article class="project" id="vla" hidden>
-    <h2>Feature-Level Interpretability of a Vision&ndash;Language&ndash;Action Model</h2>
-    <p class="meta">Trustworthy Robotics Lab <span class="dot">·</span> Advisor: G. Chou <span class="dot">·</span> May 2026 &ndash; present</p>
-    <p class="intro">
-      Vision&ndash;language&ndash;action models will pick up a cup when you ask them to, and nobody
-      can say what inside them decided to close the gripper. I look for the internal features that
-      cause the action, and then check the claim by intervening on them.
-    </p>
-
-    <div class="blocks">
-      <div class="block">
-        <div class="media"><img src="media/placeholder.svg" alt=""></div>
-        <div class="prose">
-          <h3>Sparse features, verified by intervention</h3>
-          <p>
-            Using TopK sparse autoencoders, I pull interpretable features out of OpenVLA,
-            OpenVLA-OFT, MiniVLA, WorldVLA, and &pi;0.5. Correlation is not enough, so each
-            candidate is tested in closed loop across the LIBERO suites: ablate it and the
-            behaviour should break, add it back and the behaviour should return.
-          </p>
-        </div>
-      </div>
-
-      <div class="block">
-        <div class="media"><img src="media/placeholder.svg" alt=""></div>
-        <div class="prose">
-          <h3>Ranking features without a human in the loop</h3>
-          <p>
-            Rather than hand-labelling what each feature means, I rank them by measured causal
-            contribution to the emitted action. The ordering falls out of the model's own
-            behaviour, which is what makes the method scale past a handful of features.
-          </p>
-        </div>
-      </div>
-
-      <div class="block">
-        <div class="media"><img src="media/placeholder.svg" alt=""></div>
-        <div class="prose">
-          <h3>Generalists, specialists, and a constant nobody asked for</h3>
-          <p>
-            Some features fire at grasp and at release across every task &mdash; the model has
-            learned a notion of contact. Others are specialists, tied to one phase of one
-            trajectory or one skill. I also found a near-constant baseline that contributes to the
-            commanded action independently of any interpretable feature, which sets a floor on how
-            much of the policy this method can currently explain.
-          </p>
-        </div>
-      </div>
-    </div>
-  </article>
-
-  <!-- ── Project 3 ── -->
-  <article class="project" id="symbolic" hidden>
-    <h2>Symbolic Discovery of Structural Dynamics Equations</h2>
-    <p class="meta">Moore Dynamics and Analytics Laboratory <span class="dot">·</span> Advisor: K. Moore <span class="dot">·</span> Jan 2026 &ndash; present</p>
-    <p class="intro">
-      Given only vibration response, the goal is to find the governing equations of motion
-      that describe them. I extended deep symbolic regression
-      to work for physical systems with multiple coupled degrees of freedom, and tested it on
-      simulated systems and on real experimental setups.
-    </p>
-
-    <div class="blocks">
-
-      <!-- How it works -->
-      <div class="block block--stack">
-        <div class="prose">
-          <h3>Shorter equations: n-ary trees with implicit constants</h3>
-          <p>
-            A transformer writes candidate equations token by token and is trained with
-            reinforcement learning to write ones that fit the data. In the original binary-tree
-            form, addition and multiplication take only two inputs and every constant is a token
-            of its own, so even a modest equation costs many tokens. I switched to n-ary trees,
-            where one addition or multiplication takes any number of terms, and let each token
-            carry its own coefficient, fitted to the data afterwards. The same equation takes far
-            fewer tokens, which puts more expressive equations within reach.
-          </p>
-        </div>
-        <figure class="media-row media-row--single">
-          <div class="media">
-            <img src="media/nary_tree.png" alt="The same four-term equation drawn as a binary tree with explicit constants (17 tokens, depth 5) and as an n-ary tree with implicit constants (7 tokens, depth 3).">
-          </div>
-          <figcaption class="caption">The same equation as a binary tree with explicit constants (17 tokens) and as an n-ary tree with implicit constants (7 tokens).</figcaption>
-        </figure>
-      </div>
-
-      <div class="block block--stack">
-        <div class="prose">
-          <h3>One transformer writes every equation, one term at a time</h3>
-          <p>
-            An equation of motion is a sum of forces, and a sum has no order. So the model writes
-            each degree of freedom's equation as a bag of short terms that are summed afterwards.
-            I designed a positional encoding that places every token by three coordinates: the
-            equation it belongs to, the term it sits in, and its position within that term. One
-            more embedding records where that equation falls in the writing order, which is
-            shuffled during training. Each term attends to the terms and equations already written,
-            so a coupling force found in one equation can be reused in another.
-          </p>
-        </div>
-        <figure class="media-row media-row--single">
-          <div class="media">
-            <img src="media/positional_encoding.png" alt="Two degrees of freedom written in shuffled order. Each equation is a bag of terms, each term a short token sequence whose positions restart at zero. A highlighted token's input is the sum of five embeddings: token, position in its term, term, equation, and writing order.">
-          </div>
-          <figcaption class="caption">Two DOFs written in shuffled order. Each token's input is the sum of five embeddings: the token, its position in its term, the term, the equation (DOF) it belongs to, and that equation's place in the writing order (slot).</figcaption>
-        </figure>
-      </div>
-
-      <div class="block block--stack">
-        <div class="prose">
-          <h3>Scoring a candidate</h3>
-          <p>
-            Each candidate's constants are fitted by least squares against the work&ndash;energy
-            balance and the measured acceleration. The energy balance keeps small damping terms
-            visible: they are a few percent of the acceleration, but they dominate the energy lost
-            over a cycle. Candidates are rewarded either by that balance or by simulating them
-            forward from the measured initial state and comparing the response with the record.
-            For coupled systems the search can also be restricted to equations that obey Newton's
-            third law: a force between two masses is written once, and its equal and opposite
-            reaction is added to the other equation automatically.
-          </p>
-        </div>
-      </div>
-
-      <!-- Results -->
-      <div class="block block--stack">
-        <div class="prose">
-          <h3>Simulated single-DOF systems</h3>
-          <p>
-            [One or two sentences: which systems, and what was recovered.]
-          </p>
-        </div>
-        <figure class="media-row">
-          <!-- PLOT: simulated SDOF system 1, true vs discovered response -->
-          <div class="media"><img src="media/placeholder.svg" alt=""></div>
-          <!-- PLOT: simulated SDOF system 2, true vs discovered response -->
-          <div class="media"><img src="media/placeholder.svg" alt=""></div>
-          <figcaption class="caption">Left: [system 1]. Right: [system 2]. True response against the response of the discovered equation.</figcaption>
-        </figure>
-      </div>
-
-      <div class="block block--stack">
-        <div class="prose">
-          <h3>An experimental single-DOF system with a smooth nonlinearity</h3>
-          <p>
-            [One or two sentences: the rig, the nonlinearity, and what was recovered.]
-          </p>
-        </div>
-        <figure class="media-row media-row--single">
-          <!-- PLOT: experimental SDOF, measured vs simulated displacement -->
-          <div class="media"><img src="media/placeholder.svg" alt=""></div>
-          <figcaption class="caption">Measured displacement against the discovered equation, simulated from the measured initial state. Discovered: [equation].</figcaption>
-        </figure>
-      </div>
-
-      <div class="block block--stack">
-        <div class="prose">
-          <h3>Simulated coupled systems: two and three DOFs</h3>
-          <p>
-            [One or two sentences: the systems and what was recovered.]
-          </p>
-        </div>
-        <figure class="media-row media-row--single">
-          <!-- PLOT: simulated 2-DOF, true vs discovered response, both DOFs -->
-          <div class="media"><img src="media/placeholder.svg" alt=""></div>
-          <figcaption class="caption">Two-DOF system: [system]. True against discovered response for both DOFs.</figcaption>
-        </figure>
-        <figure class="media-row media-row--single">
-          <!-- PLOT: simulated 3-DOF, true vs discovered response, all three DOFs -->
-          <div class="media"><img src="media/placeholder.svg" alt=""></div>
-          <figcaption class="caption">Three-DOF system: [system]. True against discovered response for all three DOFs.</figcaption>
-        </figure>
-      </div>
-
-      <div class="block block--stack">
-        <div class="prose">
-          <h3>An experimental coupled rig: the LO&ndash;NO system</h3>
-          <p>
-            A linear oscillator (LO) with a nonlinear oscillator (NO) attached to it through a
-            nonlinear spring, excited by hammer hits on each mass in turn. With Newton's third law
-            built in, every force between the two masses is written once and mirrored onto the
-            other. [One sentence on the result, for example how it compares with the published
-            model.]
-          </p>
-        </div>
-        <figure class="media-row media-row--single">
-          <!-- PHOTO: the LO-NO rig, or a schematic of it -->
-          <div class="media"><img src="media/placeholder.svg" alt=""></div>
-          <figcaption class="caption">[The LO&ndash;NO rig.]</figcaption>
-        </figure>
-        <figure class="media-row">
-          <!-- PLOT: LO, measured vs discovered displacement -->
-          <div class="media"><img src="media/placeholder.svg" alt=""></div>
-          <!-- PLOT: NO, measured vs discovered displacement -->
-          <div class="media"><img src="media/placeholder.svg" alt=""></div>
-          <figcaption class="caption">Measured displacement against the discovered equations, simulated together from the measured initial state. Left: LO. Right: NO.</figcaption>
-        </figure>
-      </div>
-
-    </div>
-  </article>
-
-  <!-- ── Project 4 ── -->
   <article class="project" id="steering" hidden>
     <h2>Steering Attention in a Vision&ndash;Language&ndash;Action Model</h2>
     <p class="meta">Trustworthy Robotics Lab <span class="dot">&middot;</span> Advisor: G. Chou <span class="dot">&middot;</span> May 2026 &ndash; present</p>
@@ -826,6 +623,206 @@
             <li>All results are in simulation.</li>
           </ul>
         </div>
+      </div>
+
+    </div>
+  </article>
+  <!-- ── Project 3 ── -->
+  <article class="project" id="vla" hidden>
+    <h2>Feature-Level Interpretability of a Vision&ndash;Language&ndash;Action Model</h2>
+    <p class="meta">Trustworthy Robotics Lab <span class="dot">·</span> Advisor: G. Chou <span class="dot">·</span> May 2026 &ndash; present</p>
+    <p class="intro">
+      Vision&ndash;language&ndash;action models will pick up a cup when you ask them to, and nobody
+      can say what inside them decided to close the gripper. I look for the internal features that
+      cause the action, and then check the claim by intervening on them.
+    </p>
+
+    <div class="blocks">
+      <div class="block">
+        <div class="media"><img src="media/placeholder.svg" alt=""></div>
+        <div class="prose">
+          <h3>Sparse features, verified by intervention</h3>
+          <p>
+            Using TopK sparse autoencoders, I pull interpretable features out of OpenVLA,
+            OpenVLA-OFT, MiniVLA, WorldVLA, and &pi;0.5. Correlation is not enough, so each
+            candidate is tested in closed loop across the LIBERO suites: ablate it and the
+            behaviour should break, add it back and the behaviour should return.
+          </p>
+        </div>
+      </div>
+
+      <div class="block">
+        <div class="media"><img src="media/placeholder.svg" alt=""></div>
+        <div class="prose">
+          <h3>Ranking features without a human in the loop</h3>
+          <p>
+            Rather than hand-labelling what each feature means, I rank them by measured causal
+            contribution to the emitted action. The ordering falls out of the model's own
+            behaviour, which is what makes the method scale past a handful of features.
+          </p>
+        </div>
+      </div>
+
+      <div class="block">
+        <div class="media"><img src="media/placeholder.svg" alt=""></div>
+        <div class="prose">
+          <h3>Generalists, specialists, and a constant nobody asked for</h3>
+          <p>
+            Some features fire at grasp and at release across every task &mdash; the model has
+            learned a notion of contact. Others are specialists, tied to one phase of one
+            trajectory or one skill. I also found a near-constant baseline that contributes to the
+            commanded action independently of any interpretable feature, which sets a floor on how
+            much of the policy this method can currently explain.
+          </p>
+        </div>
+      </div>
+    </div>
+  </article>
+  <!-- ── Project 4 ── -->
+  <article class="project" id="symbolic" hidden>
+    <h2>Symbolic Discovery of Structural Dynamics Equations</h2>
+    <p class="meta">Moore Dynamics and Analytics Laboratory <span class="dot">·</span> Advisor: K. Moore <span class="dot">·</span> Jan 2026 &ndash; present</p>
+    <p class="intro">
+      Given only vibration response, the goal is to find the governing equations of motion
+      that describe them. I extended deep symbolic regression
+      to work for physical systems with multiple coupled degrees of freedom, and tested it on
+      simulated systems and on real experimental setups.
+    </p>
+
+    <div class="blocks">
+
+      <!-- How it works -->
+      <div class="block block--stack">
+        <div class="prose">
+          <h3>Shorter equations: n-ary trees with implicit constants</h3>
+          <p>
+            A transformer writes candidate equations token by token and is trained with
+            reinforcement learning to write ones that fit the data. In the original binary-tree
+            form, addition and multiplication take only two inputs and every constant is a token
+            of its own, so even a modest equation costs many tokens. I switched to n-ary trees,
+            where one addition or multiplication takes any number of terms, and let each token
+            carry its own coefficient, fitted to the data afterwards. The same equation takes far
+            fewer tokens, which puts more expressive equations within reach.
+          </p>
+        </div>
+        <figure class="media-row media-row--single">
+          <div class="media">
+            <img src="media/nary_tree.png" alt="The same four-term equation drawn as a binary tree with explicit constants (17 tokens, depth 5) and as an n-ary tree with implicit constants (7 tokens, depth 3).">
+          </div>
+          <figcaption class="caption">The same equation as a binary tree with explicit constants (17 tokens) and as an n-ary tree with implicit constants (7 tokens).</figcaption>
+        </figure>
+      </div>
+
+      <div class="block block--stack">
+        <div class="prose">
+          <h3>One transformer writes every equation, one term at a time</h3>
+          <p>
+            An equation of motion is a sum of forces, and a sum has no order. So the model writes
+            each degree of freedom's equation as a bag of short terms that are summed afterwards.
+            I designed a positional encoding that places every token by three coordinates: the
+            equation it belongs to, the term it sits in, and its position within that term. One
+            more embedding records where that equation falls in the writing order, which is
+            shuffled during training. Each term attends to the terms and equations already written,
+            so a coupling force found in one equation can be reused in another.
+          </p>
+        </div>
+        <figure class="media-row media-row--single">
+          <div class="media">
+            <img src="media/positional_encoding.png" alt="Two degrees of freedom written in shuffled order. Each equation is a bag of terms, each term a short token sequence whose positions restart at zero. A highlighted token's input is the sum of five embeddings: token, position in its term, term, equation, and writing order.">
+          </div>
+          <figcaption class="caption">Two DOFs written in shuffled order. Each token's input is the sum of five embeddings: the token, its position in its term, the term, the equation (DOF) it belongs to, and that equation's place in the writing order (slot).</figcaption>
+        </figure>
+      </div>
+
+      <div class="block block--stack">
+        <div class="prose">
+          <h3>Scoring a candidate</h3>
+          <p>
+            Each candidate's constants are fitted by least squares against the work&ndash;energy
+            balance and the measured acceleration. The energy balance keeps small damping terms
+            visible: they are a few percent of the acceleration, but they dominate the energy lost
+            over a cycle. Candidates are rewarded either by that balance or by simulating them
+            forward from the measured initial state and comparing the response with the record.
+            For coupled systems the search can also be restricted to equations that obey Newton's
+            third law: a force between two masses is written once, and its equal and opposite
+            reaction is added to the other equation automatically.
+          </p>
+        </div>
+      </div>
+
+      <!-- Results -->
+      <div class="block block--stack">
+        <div class="prose">
+          <h3>Simulated single-DOF systems</h3>
+          <p>
+            [One or two sentences: which systems, and what was recovered.]
+          </p>
+        </div>
+        <figure class="media-row">
+          <!-- PLOT: simulated SDOF system 1, true vs discovered response -->
+          <div class="media"><img src="media/placeholder.svg" alt=""></div>
+          <!-- PLOT: simulated SDOF system 2, true vs discovered response -->
+          <div class="media"><img src="media/placeholder.svg" alt=""></div>
+          <figcaption class="caption">Left: [system 1]. Right: [system 2]. True response against the response of the discovered equation.</figcaption>
+        </figure>
+      </div>
+
+      <div class="block block--stack">
+        <div class="prose">
+          <h3>An experimental single-DOF system with a smooth nonlinearity</h3>
+          <p>
+            [One or two sentences: the rig, the nonlinearity, and what was recovered.]
+          </p>
+        </div>
+        <figure class="media-row media-row--single">
+          <!-- PLOT: experimental SDOF, measured vs simulated displacement -->
+          <div class="media"><img src="media/placeholder.svg" alt=""></div>
+          <figcaption class="caption">Measured displacement against the discovered equation, simulated from the measured initial state. Discovered: [equation].</figcaption>
+        </figure>
+      </div>
+
+      <div class="block block--stack">
+        <div class="prose">
+          <h3>Simulated coupled systems: two and three DOFs</h3>
+          <p>
+            [One or two sentences: the systems and what was recovered.]
+          </p>
+        </div>
+        <figure class="media-row media-row--single">
+          <!-- PLOT: simulated 2-DOF, true vs discovered response, both DOFs -->
+          <div class="media"><img src="media/placeholder.svg" alt=""></div>
+          <figcaption class="caption">Two-DOF system: [system]. True against discovered response for both DOFs.</figcaption>
+        </figure>
+        <figure class="media-row media-row--single">
+          <!-- PLOT: simulated 3-DOF, true vs discovered response, all three DOFs -->
+          <div class="media"><img src="media/placeholder.svg" alt=""></div>
+          <figcaption class="caption">Three-DOF system: [system]. True against discovered response for all three DOFs.</figcaption>
+        </figure>
+      </div>
+
+      <div class="block block--stack">
+        <div class="prose">
+          <h3>An experimental coupled rig: the LO&ndash;NO system</h3>
+          <p>
+            A linear oscillator (LO) with a nonlinear oscillator (NO) attached to it through a
+            nonlinear spring, excited by hammer hits on each mass in turn. With Newton's third law
+            built in, every force between the two masses is written once and mirrored onto the
+            other. [One sentence on the result, for example how it compares with the published
+            model.]
+          </p>
+        </div>
+        <figure class="media-row media-row--single">
+          <!-- PHOTO: the LO-NO rig, or a schematic of it -->
+          <div class="media"><img src="media/placeholder.svg" alt=""></div>
+          <figcaption class="caption">[The LO&ndash;NO rig.]</figcaption>
+        </figure>
+        <figure class="media-row">
+          <!-- PLOT: LO, measured vs discovered displacement -->
+          <div class="media"><img src="media/placeholder.svg" alt=""></div>
+          <!-- PLOT: NO, measured vs discovered displacement -->
+          <div class="media"><img src="media/placeholder.svg" alt=""></div>
+          <figcaption class="caption">Measured displacement against the discovered equations, simulated together from the measured initial state. Left: LO. Right: NO.</figcaption>
+        </figure>
       </div>
 
     </div>
