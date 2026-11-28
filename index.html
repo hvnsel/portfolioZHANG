@@ -673,9 +673,11 @@
           </p>
         </div>
         <p class="note">
-          Each strip is the eight decisions where one feature contributed most to the action, in two
-          blocks of four, with the main camera above the wrist camera in each block. The task count is
-          how many different tasks the feature acts across.
+          Each strip is eight decisions where one feature contributed most to the action, in two blocks
+          of four, with the main camera above the wrist camera in each block. For &pi;0.5 and MiniVLA
+          these are the eight strongest decisions overall, and the heading gives how many tasks the
+          feature acts across. The OpenVLA sheets are organised by task instead, so those strips take
+          the strongest decision in each of eight tasks and carry no task count.
         </p>
         <h4 class="feat-group">General</h4>
         <figure class="feat">
@@ -693,6 +695,16 @@
           <img class="plot" src="media/portfolio_vla_features/f1245_pi05_general.png" alt="Feature 1245 on pi0.5: its eight strongest frames, the wrist camera showing the gripper fully closed each time.">
           <p class="caption">The gripper closed to its fullest extent.</p>
         </figure>
+        <figure class="feat">
+          <figcaption class="feat-head">feature 293 <span>&middot; OpenVLA</span></figcaption>
+          <img class="plot" src="media/portfolio_vla_features/f0293_openvla_general.png" alt="Feature 293 on OpenVLA: its strongest frame in each of eight tasks, main camera above the wrist camera in each block.">
+          <p class="caption">Strongest frame in each of eight tasks.</p>
+        </figure>
+        <figure class="feat">
+          <figcaption class="feat-head">feature 731 <span>&middot; OpenVLA</span></figcaption>
+          <img class="plot" src="media/portfolio_vla_features/f0731_openvla_general.png" alt="Feature 731 on OpenVLA: its strongest frame in each of eight tasks.">
+          <p class="caption">Strongest frame in each of eight tasks.</p>
+        </figure>
         <h4 class="feat-group">Specialist</h4>
         <figure class="feat">
           <figcaption class="feat-head">feature 1271 <span>&middot; &pi;0.5 &middot; 8 tasks</span></figcaption>
@@ -703,6 +715,16 @@
           <figcaption class="feat-head">feature 282 <span>&middot; &pi;0.5 &middot; 4 tasks</span></figcaption>
           <img class="plot" src="media/portfolio_vla_features/f0282_pi05_specialist.png" alt="Feature 282 on pi0.5: its eight strongest frames, all the same red box carried over a basket in one episode.">
           <p class="caption">One box over one basket, one episode.</p>
+        </figure>
+        <figure class="feat">
+          <figcaption class="feat-head">feature 928 <span>&middot; OpenVLA</span></figcaption>
+          <img class="plot" src="media/portfolio_vla_features/f0928_openvla_specialist.png" alt="Feature 928 on OpenVLA: its strongest frame in each of eight tasks.">
+          <p class="caption">Strongest frame in each of eight tasks.</p>
+        </figure>
+        <figure class="feat">
+          <figcaption class="feat-head">feature 1251 <span>&middot; OpenVLA</span></figcaption>
+          <img class="plot" src="media/portfolio_vla_features/f1251_openvla_specialist.png" alt="Feature 1251 on OpenVLA: its strongest frame in each of eight tasks.">
+          <p class="caption">Strongest frame in each of eight tasks.</p>
         </figure>
       </div>
     </div>
