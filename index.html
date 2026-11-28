@@ -880,15 +880,27 @@
       <div class="block block--stack">
         <div class="prose">
           <h3>An experimental single-DOF system with a smooth nonlinearity</h3>
+        </div>
+        <figure class="plotfig">
+          <img class="plot" src="media/portfolio_exp_plots/sdof_SN_Data_dof1_trial0_comparison.png" alt="Experimental single-DOF rig: displacement, velocity and acceleration against time over a 45 second decay, the measured record and the discovered equation overlapping.">
+          <figcaption class="caption">The measured record against the discovered equation, forward-simulated from the measured initial state (trial&nbsp;0).</figcaption>
+        </figure>
+        <div class="prose">
           <p>
-            [One or two sentences: the rig, the nonlinearity, and what was recovered.]
+            A measured rig, released and left to decay over about 45 seconds. The discovered equation tracks the
+            record through the whole decay, in displacement, velocity and acceleration. Motion here is a few
+            millimetres, so the very large coefficients on the x<sup>3</sup> and x<sup>4</sup>ẋ<sup>3</sup>
+            terms are acting on very small numbers.
           </p>
         </div>
-        <figure class="media-row media-row--single">
-          <!-- PLOT: experimental SDOF, measured vs simulated displacement -->
-          <div class="media"><img src="media/placeholder.svg" alt=""></div>
-          <figcaption class="caption">Measured displacement against the discovered equation, simulated from the measured initial state. Discovered: [equation].</figcaption>
-        </figure>
+        <div class="eqs">
+          <div class="eq">
+            <span class="eq-label">Discovered</span>
+            <div class="eq-body">
+              <div>ẍ = 6.329&times;10<sup>10</sup>&#8202;x<sup>4</sup>ẋ<sup>3</sup> &minus; 2.122&times;10<sup>7</sup>&#8202;x<sup>3</sup> &minus; 223.5&#8202;xẋ &minus; 464.8&#8202;x &minus; 213.9&#8202;ẋ<sup>4</sup> &minus; 14.68&#8202;ẋ<sup>3</sup> &minus; 0.1694&#8202;ẋ &minus; 0.01385</div>
+            </div>
+          </div>
+        </div>
       </div>
 
 
