@@ -932,26 +932,31 @@
       <div class="block block--stack">
         <div class="prose">
           <h3>An experimental coupled rig: the LO&ndash;NO system</h3>
+        </div>
+        <figure class="plotfig">
+          <img class="plot" src="media/portfolio_exp_plots/mdof_lono_trial1_comparison.webp" alt="LO-NO rig: displacement, velocity and acceleration of both masses against time over about five seconds, the measured record and the discovered equations.">
+          <figcaption class="caption">Both masses against the discovered equations, forward-simulated together from the measured initial state (trial&nbsp;1). Left: the linear oscillator. Right: the nonlinear oscillator.</figcaption>
+        </figure>
+        <div class="prose">
           <p>
-            A linear oscillator (LO) with a nonlinear oscillator (NO) attached to it through a
-            nonlinear spring, excited by hammer hits on each mass in turn. With Newton's third law
-            built in, every force between the two masses is written once and mirrored onto the
-            other. [One sentence on the result, for example how it compares with the published
-            model.]
+            A linear oscillator joined to a nonlinear one by a nonlinear spring, excited by hammer hits. The
+            search ran with Newton&rsquo;s third law built in, so the force between the two masses is written
+            once and mirrored; it comes back in the same ratio across all nine shared coupling terms, 1.165,
+            which is what one shared force divided by two different masses gives. The ground springs come out
+            as the rig is built &mdash; linear on q<sub>1</sub>, purely cubic on q<sub>2</sub> &mdash; and the simulation
+            follows both masses closely for roughly the first two seconds, then holds the right amplitude and
+            decay while drifting out of phase.
           </p>
         </div>
-        <figure class="media-row media-row--single">
-          <!-- PHOTO: the LO-NO rig, or a schematic of it -->
-          <div class="media"><img src="media/placeholder.svg" alt=""></div>
-          <figcaption class="caption">[The LO&ndash;NO rig.]</figcaption>
-        </figure>
-        <figure class="media-row">
-          <!-- PLOT: LO, measured vs discovered displacement -->
-          <div class="media"><img src="media/placeholder.svg" alt=""></div>
-          <!-- PLOT: NO, measured vs discovered displacement -->
-          <div class="media"><img src="media/placeholder.svg" alt=""></div>
-          <figcaption class="caption">Measured displacement against the discovered equations, simulated together from the measured initial state. Left: LO. Right: NO.</figcaption>
-        </figure>
+        <div class="eqs">
+          <div class="eq">
+            <span class="eq-label">Discovered</span>
+            <div class="eq-body">
+              <div>q̈<sub>1</sub> = &minus;3.159&times;10<sup>7</sup>&#8202;(q<sub>1</sub>&minus;q<sub>2</sub>)<sup>3</sup> + 2.010&times;10<sup>5</sup>&#8202;(q<sub>1</sub>&minus;q<sub>2</sub>)<sup>2</sup>(q̇<sub>1</sub>&minus;q̇<sub>2</sub>) + 1.830&times;10<sup>4</sup>&#8202;(q<sub>1</sub>&minus;q<sub>2</sub>)<sup>2</sup> + 63.68&#8202;(q<sub>1</sub>&minus;q<sub>2</sub>)(q̇<sub>1</sub>&minus;q̇<sub>2</sub>) &minus; 1290&#8202;(q<sub>1</sub>&minus;q<sub>2</sub>) + 156.4&#8202;(q̇<sub>1</sub>&minus;q̇<sub>2</sub>)<sup>4</sup> &minus; 10.88&#8202;(q̇<sub>1</sub>&minus;q̇<sub>2</sub>)<sup>3</sup> &minus; 12.25&#8202;(q̇<sub>1</sub>&minus;q̇<sub>2</sub>)<sup>2</sup> &minus; 0.7868&#8202;(q̇<sub>1</sub>&minus;q̇<sub>2</sub>) &minus; 9.788&times;10<sup>6</sup>&#8202;q<sub>1</sub><sup>2</sup>q̇<sub>1</sub> &minus; 1.378&times;10<sup>4</sup>&#8202;q<sub>1</sub> + 171.6&#8202;q̇<sub>1</sub><sup>3</sup> &minus; 1.180&#8202;q̇<sub>1</sub> &minus; 0.05410</div>
+              <div>q̈<sub>2</sub> = 2.712&times;10<sup>7</sup>&#8202;(q<sub>1</sub>&minus;q<sub>2</sub>)<sup>3</sup> &minus; 1.725&times;10<sup>5</sup>&#8202;(q<sub>1</sub>&minus;q<sub>2</sub>)<sup>2</sup>(q̇<sub>1</sub>&minus;q̇<sub>2</sub>) &minus; 1.571&times;10<sup>4</sup>&#8202;(q<sub>1</sub>&minus;q<sub>2</sub>)<sup>2</sup> &minus; 54.66&#8202;(q<sub>1</sub>&minus;q<sub>2</sub>)(q̇<sub>1</sub>&minus;q̇<sub>2</sub>) + 1107&#8202;(q<sub>1</sub>&minus;q<sub>2</sub>) &minus; 134.2&#8202;(q̇<sub>1</sub>&minus;q̇<sub>2</sub>)<sup>4</sup> + 9.339&#8202;(q̇<sub>1</sub>&minus;q̇<sub>2</sub>)<sup>3</sup> + 10.52&#8202;(q̇<sub>1</sub>&minus;q̇<sub>2</sub>)<sup>2</sup> + 0.6753&#8202;(q̇<sub>1</sub>&minus;q̇<sub>2</sub>) &minus; 1.405&times;10<sup>7</sup>&#8202;q<sub>2</sub><sup>3</sup></div>
+            </div>
+          </div>
+        </div>
       </div>
 
     </div>
